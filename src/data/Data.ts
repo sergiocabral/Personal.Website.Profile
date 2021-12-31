@@ -100,6 +100,11 @@ const data: Configuration = {
                 description: "Meus Projetos",
                 content: [
                     {
+                        name: "E-Books",
+                        url: "https://ebooks.sergiocabral.com/",
+                        icon: "fas fa-book"
+                    },
+                    {
                         name: "Fotografias",
                         url: "https://sergiocabral.com/fotos",
                         icon: "fas fa-camera-retro"
