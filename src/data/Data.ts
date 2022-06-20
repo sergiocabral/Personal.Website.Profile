@@ -55,7 +55,7 @@ const data: Configuration = {
                     },
                     {
                         name: "StackOverflow",
-                        url: "https://stackoverflow.com/story/sergiocabral",
+                        url: "https://stackexchange.com/users/1488902/sergio-cabral",
                         icon: "fab fa-stack-overflow"
                     },
                     {
@@ -75,7 +75,7 @@ const data: Configuration = {
                     },
                     {
                         name: "Instagram",
-                        url: "https://www.instagram.com/sergiocabraljunior",
+                        url: "https://www.instagram.com/sergiocabral.dev/",
                         icon: "fab fa-instagram"
                     },
                     {
@@ -106,7 +106,7 @@ const data: Configuration = {
                     },
                     {
                         name: "Fotografias",
-                        url: "https://sergiocabral.com/fotos",
+                        url: "https://fotos.sergiocabral.com/",
                         icon: "fas fa-camera-retro"
                     },
                     {
