@@ -70,7 +70,7 @@ const data: Configuration = {
                     },
                     {
                         name: "YouTube",
-                        url: "https://www.youtube.com/c/SergioCabralJr",
+                        url: "https://www.youtube.com/channel/UCBBmSw69UpBbncKM2Xbw-hQ/videos",
                         icon: "fab fa-youtube-square"
                     },
                     {
