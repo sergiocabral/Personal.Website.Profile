@@ -34,7 +34,7 @@ const data: Configuration = {
                     },
                     {
                         name: "Discord",
-                        url: "https://discord.com/invite/quhUpunfx7",
+                        url: "https://discord.gg/Fv85jcEEp3",
                         icon: "fab fa-discord"
                     },
                     {
@@ -65,7 +65,7 @@ const data: Configuration = {
                     },
                     {
                         name: "Twitch",
-                        url: "https://www.twitch.tv/sergiocabral_com",
+                        url: "https://www.twitch.tv/sergiocabral_dev",
                         icon: "fab fa-twitch"
                     },
                     {
