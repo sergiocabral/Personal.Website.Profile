@@ -15,21 +15,21 @@
     "clean": "gatsby clean"
   },
   "devDependencies": {
-    "@types/react-helmet": "^6.1.2"
+    "@types/react-helmet": "^6.1.6"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.36",
-    "@fortawesome/free-brands-svg-icons": "^5.15.4",
-    "@fortawesome/free-regular-svg-icons": "^5.15.4",
-    "@fortawesome/free-solid-svg-icons": "^5.15.4",
-    "@fortawesome/react-fontawesome": "^0.1.15",
-    "gatsby": "^3.12.1",
-    "gatsby-plugin-react-helmet": "^4.13.0",
-    "gatsby-plugin-sass": "^4.13.0",
-    "html-react-parser": "^1.2.8",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/free-regular-svg-icons": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "gatsby": "^5.12.4",
+    "gatsby-plugin-react-helmet": "^6.12.0",
+    "gatsby-plugin-sass": "^6.12.0",
+    "html-react-parser": "^4.2.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "sass": "^1.38.2"
+    "sass": "^1.68.0"
   }
 }
