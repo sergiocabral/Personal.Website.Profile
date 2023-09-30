@@ -145,6 +145,7 @@
 
             transition: opacity 0.5s ease;
             opacity: 0;
+            visibility: hidden;
 
             z-index: 1;
 
@@ -156,6 +157,7 @@
 
         &:hover:after {
             opacity: 1;
+            visibility: visible;
         }
     }
 }
