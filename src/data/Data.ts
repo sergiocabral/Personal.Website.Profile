@@ -133,7 +133,7 @@ const data: Configuration = {
                     <p>
                         🍕 Não me lembro bem quando comecei a me aventurar
                         com códigos e programação, 👶 talvez nos meus 13 anos.
-                        Mas hoje tenho 39? 👨‍🦳
+                        Mas hoje tenho 41? 👨‍🦳
                     </p>
                     <p>
                         🏁 Hoje em dia trabalho como <b>desenvolvedor sênior
