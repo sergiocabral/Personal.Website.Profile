@@ -19,7 +19,7 @@ const data: Configuration = {
                 content: [
                     {
                         name: "Email",
-                        url: "mailto:contact@sergiocabral.com",
+                        url: "mailto:contact@sergiocabral.dev",
                         icon: "far fa-envelope"
                     },
                     {
@@ -99,6 +99,11 @@ const data: Configuration = {
                 name: "fas fa-cogs",
                 description: "Meus Projetos",
                 content: [
+                    {
+                        name: "I Don't Need It",
+                        url: "https://idontneedit.org/",
+                        icon: "fas fa-money-bill"
+                    },
                     {
                         name: "E-Books",
                         url: "https://ebooks.sergiocabral.com/",
