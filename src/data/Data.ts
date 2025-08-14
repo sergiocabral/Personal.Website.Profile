@@ -18,6 +18,11 @@ const data: Configuration = {
                 description: "Contatos",
                 content: [
                     {
+                        name: "The Loop",
+                        url: "https://loop.cabral.dev/",
+                        icon: "fas fa-infinity"
+                    },
+                    {
                         name: "Email",
                         url: "mailto:contact@sergiocabral.dev",
                         icon: "far fa-envelope"
