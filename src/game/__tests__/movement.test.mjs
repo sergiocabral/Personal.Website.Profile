@@ -20,7 +20,9 @@ const here = dirname(fileURLToPath(import.meta.url));
 /** Lê CAMERA_DIRECTION do fonte, para o teste seguir a constante de verdade. */
 function cameraDirection() {
   const source = readFileSync(resolve(here, '..', 'constants.ts'), 'utf8');
-  const match = source.match(/CAMERA_DIRECTION:\s*\[number,\s*number,\s*number\]\s*=\s*\[([^\]]+)\]/);
+  const match = source.match(
+    /CAMERA_DIRECTION:\s*\[number,\s*number,\s*number\]\s*=\s*\[([^\]]+)\]/,
+  );
   assert.ok(match, 'CAMERA_DIRECTION não encontrada em constants.ts');
   return match[1].split(',').map((value) => Number(value.trim()));
 }
@@ -33,10 +35,7 @@ const right = [-forward[1], forward[0]];
 
 /** Mesma conversão de Player.tsx. */
 function toWorld(inputX, inputY) {
-  return [
-    right[0] * inputX - forward[0] * inputY,
-    right[1] * inputX - forward[1] * inputY,
-  ];
+  return [right[0] * inputX - forward[0] * inputY, right[1] * inputX - forward[1] * inputY];
 }
 
 const close = (a, b) => Math.abs(a - b) < 1e-9;
