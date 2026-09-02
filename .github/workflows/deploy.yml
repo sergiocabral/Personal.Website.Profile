@@ -1,0 +1,59 @@
+# Publicação alternativa, no GitHub Pages.
+#
+# Fica em disparo manual de propósito: quem publica o site hoje é o Netlify, e
+# dois deploys automáticos apontando para o mesmo domínio brigariam entre si.
+#
+# Para migrar para o Pages: ative Settings > Pages > Source: GitHub Actions,
+# aponte o DNS, rode este fluxo por "Run workflow" e, quando estiver no ar,
+# desconecte o Netlify e troque este gatilho por "push: branches: [main]".
+name: Deploy (GitHub Pages)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Um deploy por vez; um push novo cancela o anterior ainda em andamento.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      # Valida os dados antes de compilar: um link quebrado ou uma zona órfã
+      # falha aqui, e não depois de publicado.
+      - run: npm run verify:content
+
+      - run: npm run lint
+
+      - run: npm run build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

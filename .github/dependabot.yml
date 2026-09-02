@@ -1,12 +1,25 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: npm
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
     open-pull-requests-limit: 10
-  - package-ecosystem: "github-actions"
-    directory: "/"
+    ignore:
+      # typescript-eslint ainda não suporta TypeScript 7 (a API programática só
+      # estabiliza na 7.1). Subir agora quebraria o lint inteiro.
+      - dependency-name: typescript
+        update-types: ['version-update:semver-major']
+
+      # O peer de @react-three/fiber 9 é "react >=19 <19.3": um minor automático
+      # quebraria a instalação.
+      - dependency-name: react
+        update-types: ['version-update:semver-minor', 'version-update:semver-major']
+      - dependency-name: react-dom
+        update-types: ['version-update:semver-minor', 'version-update:semver-major']
+
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
     open-pull-requests-limit: 10
