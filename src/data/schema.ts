@@ -127,6 +127,13 @@ export type WorldData = {
     waterRadius: number;
     /** Praça central: a área calçada de onde saem os caminhos. */
     plazaRadius: number;
+    /**
+     * Anel livre em volta da fonte, dentro da praça.
+     *
+     * É por ele que se contorna a fonte para passar de um caminho a outro. O
+     * gerador do mundo garante que nada com colisão o ocupe.
+     */
+    plazaRing: number;
   };
   spawn: Vec2;
   /** Distância que o personagem pode se afastar do centro antes de ser contido. */

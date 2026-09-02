@@ -3,29 +3,21 @@
     "grassRadius": 18,
     "sandRadius": 20.8,
     "waterRadius": 60,
-    "plazaRadius": 5.4
+    "plazaRadius": 5.4,
+    "plazaRing": 3.4
   },
-  "spawn": [
-    0,
-    3.2
-  ],
+  "spawn": [0, 3.4],
   "boundsRadius": 18.6,
   "zones": [
     {
       "sectionId": "projects",
-      "position": [
-        -8.13,
-        -8.13
-      ],
+      "position": [-8.13, -8.13],
       "radius": 5,
       "facing": 45,
       "building": {
         "kind": "workshop",
         "height": 4.6,
-        "footprint": [
-          5.2,
-          4.6
-        ],
+        "footprint": [5.2, 4.6],
         "color": "wall",
         "roofColor": "roofPurple",
         "rotation": 45
@@ -33,19 +25,13 @@
     },
     {
       "sectionId": "contacts",
-      "position": [
-        8.13,
-        -8.13
-      ],
+      "position": [8.13, -8.13],
       "radius": 4.8,
       "facing": -45,
       "building": {
         "kind": "house",
         "height": 3.8,
-        "footprint": [
-          4.8,
-          4.4
-        ],
+        "footprint": [4.8, 4.4],
         "color": "wall",
         "roofColor": "roofRed",
         "rotation": -45
@@ -53,19 +39,13 @@
     },
     {
       "sectionId": "about",
-      "position": [
-        8.13,
-        8.13
-      ],
+      "position": [8.13, 8.13],
       "radius": 4.1,
       "facing": -135,
       "building": {
         "kind": "signboard",
         "height": 3,
-        "footprint": [
-          3.4,
-          1.2
-        ],
+        "footprint": [3.4, 1.2],
         "color": "wall",
         "roofColor": "roofOrange",
         "rotation": -135
@@ -73,19 +53,13 @@
     },
     {
       "sectionId": "social",
-      "position": [
-        -8.13,
-        8.13
-      ],
+      "position": [-8.13, 8.13],
       "radius": 4.4,
       "facing": 135,
       "building": {
         "kind": "tower",
         "height": 6.4,
-        "footprint": [
-          4,
-          4
-        ],
+        "footprint": [4, 4],
         "color": "wall",
         "roofColor": "roofBlue",
         "rotation": 135
@@ -95,1186 +69,693 @@
   "props": [
     {
       "kind": "fountain",
-      "position": [
-        0,
-        0
-      ]
-    },
-    {
-      "kind": "lamp",
-      "position": [
-        4.1,
-        0
-      ]
+      "position": [0, 0]
     },
     {
       "kind": "bench",
-      "position": [
-        2.47,
-        2.47
-      ],
-      "rotation": 45
+      "position": [5, 0],
+      "rotation": 180
     },
     {
       "kind": "lamp",
-      "position": [
-        0,
-        4.1
-      ]
+      "position": [6.3, 0]
     },
     {
       "kind": "bench",
-      "position": [
-        -2.47,
-        2.47
-      ],
-      "rotation": -45
+      "position": [0, 5],
+      "rotation": 90
     },
     {
       "kind": "lamp",
-      "position": [
-        -4.1,
-        0
-      ]
+      "position": [0, 6.3]
     },
     {
       "kind": "bench",
-      "position": [
-        -2.47,
-        -2.47
-      ],
-      "rotation": -135
+      "position": [-5, 0],
+      "rotation": 0
     },
     {
       "kind": "lamp",
-      "position": [
-        0,
-        -4.1
-      ]
+      "position": [-6.3, 0]
     },
     {
       "kind": "bench",
-      "position": [
-        2.47,
-        -2.47
-      ],
-      "rotation": -225
+      "position": [0, -5],
+      "rotation": -90
+    },
+    {
+      "kind": "lamp",
+      "position": [0, -6.3]
     },
     {
       "kind": "tree",
-      "position": [
-        -1.51,
-        11.41
-      ],
+      "position": [-1.51, 11.41],
       "rotation": 288,
       "scale": 1.03
     },
     {
       "kind": "tree",
-      "position": [
-        -10.92,
-        -1.81
-      ],
+      "position": [-10.92, -1.81],
       "rotation": 93,
       "scale": 0.87
     },
     {
       "kind": "tree",
-      "position": [
-        16.26,
-        2.92
-      ],
+      "position": [16.26, 2.92],
       "rotation": 291,
       "scale": 1.25
     },
     {
       "kind": "tree",
-      "position": [
-        -0.92,
-        7.64
-      ],
-      "rotation": 134,
-      "scale": 1
-    },
-    {
-      "kind": "tree",
-      "position": [
-        15.84,
-        -2.49
-      ],
+      "position": [15.84, -2.49],
       "rotation": 180,
       "scale": 0.85
     },
     {
       "kind": "tree",
-      "position": [
-        0.27,
-        -7.68
-      ],
-      "rotation": 310,
-      "scale": 0.86
-    },
-    {
-      "kind": "tree",
-      "position": [
-        1.23,
-        15.33
-      ],
+      "position": [1.23, 15.33],
       "rotation": 296,
       "scale": 1
     },
     {
       "kind": "tree",
-      "position": [
-        1.46,
-        12.17
-      ],
+      "position": [1.46, 12.17],
       "rotation": 207,
       "scale": 1.12
     },
     {
       "kind": "tree",
-      "position": [
-        -11.57,
-        0.69
-      ],
+      "position": [-11.57, 0.69],
       "rotation": 105,
       "scale": 1.09
     },
     {
       "kind": "tree",
-      "position": [
-        -5.31,
-        -14.66
-      ],
+      "position": [-5.31, -14.66],
       "rotation": 333,
       "scale": 0.97
     },
     {
       "kind": "tree",
-      "position": [
-        -1.96,
-        14.75
-      ],
+      "position": [-1.96, 14.75],
       "rotation": 182,
       "scale": 1.18
     },
     {
       "kind": "tree",
-      "position": [
-        14.03,
-        -0.41
-      ],
+      "position": [14.03, -0.41],
       "rotation": 309,
       "scale": 0.86
     },
     {
       "kind": "tree",
-      "position": [
-        -7.24,
-        -1.34
-      ],
-      "rotation": 285,
-      "scale": 0.89
-    },
-    {
-      "kind": "tree",
-      "position": [
-        8.48,
-        2.21
-      ],
+      "position": [8.48, 2.21],
       "rotation": 347,
       "scale": 0.9
     },
     {
       "kind": "tree",
-      "position": [
-        -4.65,
-        15.04
-      ],
+      "position": [-4.65, 15.04],
       "rotation": 273,
       "scale": 1.21
     },
     {
       "kind": "tree",
-      "position": [
-        11.83,
-        1.95
-      ],
+      "position": [11.83, 1.95],
       "rotation": 14,
       "scale": 1.18
     },
     {
       "kind": "tree",
-      "position": [
-        -14.16,
-        -5.41
-      ],
+      "position": [-14.16, -5.41],
       "rotation": 1,
       "scale": 1.18
     },
     {
       "kind": "tree",
-      "position": [
-        -0.03,
-        -13.81
-      ],
+      "position": [-0.03, -13.81],
       "rotation": 227,
       "scale": 1.12
     },
     {
       "kind": "tree",
-      "position": [
-        15.53,
-        5.76
-      ],
+      "position": [15.53, 5.76],
       "rotation": 64,
       "scale": 1.22
     },
     {
       "kind": "tree",
-      "position": [
-        -15.28,
-        6.43
-      ],
+      "position": [-15.28, 6.43],
       "rotation": 28,
       "scale": 1.16
     },
     {
       "kind": "tree",
-      "position": [
-        11.25,
-        -2.48
-      ],
+      "position": [11.25, -2.48],
       "rotation": 131,
       "scale": 1.05
     },
     {
       "kind": "tree",
-      "position": [
-        12.87,
-        4.13
-      ],
+      "position": [0.32, -9.49],
+      "rotation": 338,
+      "scale": 0.99
+    },
+    {
+      "kind": "tree",
+      "position": [12.87, 4.13],
       "rotation": 251,
       "scale": 1.16
     },
     {
-      "kind": "bush",
-      "position": [
-        14.8,
-        4.22
-      ],
-      "rotation": 334,
-      "scale": 1.18
-    },
-    {
-      "kind": "bush",
-      "position": [
-        -8.57,
-        2.57
-      ],
-      "rotation": 29,
-      "scale": 1.14
-    },
-    {
-      "kind": "bush",
-      "position": [
-        -2.32,
-        -11.09
-      ],
+      "kind": "tree",
+      "position": [-2.32, -11.09],
       "rotation": 93,
-      "scale": 0.88
+      "scale": 0.92
     },
     {
-      "kind": "bush",
-      "position": [
-        -1.2,
-        -8.72
-      ],
-      "rotation": 210,
-      "scale": 0.81
-    },
-    {
-      "kind": "bush",
-      "position": [
-        1.3,
-        8.42
-      ],
+      "kind": "tree",
+      "position": [1.3, 8.42],
       "rotation": 102,
-      "scale": 1.04
+      "scale": 1.05
     },
     {
       "kind": "bush",
-      "position": [
-        -0.09,
-        13.67
-      ],
+      "position": [-0.09, 13.67],
       "rotation": 41,
       "scale": 0.83
     },
     {
       "kind": "bush",
-      "position": [
-        -10.98,
-        2.78
-      ],
+      "position": [-10.98, 2.78],
       "rotation": 244,
       "scale": 0.87
     },
     {
       "kind": "bush",
-      "position": [
-        -3.78,
-        -15.31
-      ],
+      "position": [-3.78, -15.31],
       "rotation": 232,
       "scale": 1.06
     },
     {
       "kind": "bush",
-      "position": [
-        9.4,
-        -0.62
-      ],
+      "position": [9.4, -0.62],
       "rotation": 140,
       "scale": 1.01
     },
     {
       "kind": "bush",
-      "position": [
-        10.43,
-        0.65
-      ],
+      "position": [10.43, 0.65],
       "rotation": 252,
       "scale": 1.08
     },
     {
       "kind": "bush",
-      "position": [
-        -15.46,
-        -2.65
-      ],
+      "position": [-15.46, -2.65],
       "rotation": 9,
       "scale": 0.82
     },
     {
       "kind": "bush",
-      "position": [
-        4.08,
-        -14.12
-      ],
+      "position": [4.08, -14.12],
       "rotation": 225,
       "scale": 0.9
     },
     {
       "kind": "bush",
-      "position": [
-        14.59,
-        -5.09
-      ],
+      "position": [-2.34, 8.36],
+      "rotation": 334,
+      "scale": 1
+    },
+    {
+      "kind": "bush",
+      "position": [-7.29, 1.68],
+      "rotation": 214,
+      "scale": 1.2
+    },
+    {
+      "kind": "bush",
+      "position": [14.59, -5.09],
       "rotation": 295,
       "scale": 0.91
     },
     {
       "kind": "bush",
-      "position": [
-        7.14,
-        0.08
-      ],
-      "rotation": 40,
-      "scale": 0.95
-    },
-    {
-      "kind": "bush",
-      "position": [
-        -7.6,
-        0.57
-      ],
-      "rotation": 237,
-      "scale": 0.94
-    },
-    {
-      "kind": "bush",
-      "position": [
-        8.97,
-        13.86
-      ],
+      "position": [8.97, 13.86],
       "rotation": 260,
       "scale": 0.84
     },
     {
-      "kind": "rock",
-      "position": [
-        2.78,
-        13.6
-      ],
+      "kind": "bush",
+      "position": [2.78, 13.6],
       "rotation": 147,
-      "scale": 1.24
+      "scale": 1.25
     },
     {
-      "kind": "rock",
-      "position": [
-        10.31,
-        2.74
-      ],
+      "kind": "bush",
+      "position": [10.31, 2.74],
       "rotation": 228,
-      "scale": 0.98
+      "scale": 1.03
     },
     {
-      "kind": "rock",
-      "position": [
-        1.99,
-        -12.03
-      ],
+      "kind": "bush",
+      "position": [1.99, -12.03],
       "rotation": 200,
-      "scale": 1.24
+      "scale": 1.25
     },
     {
-      "kind": "rock",
-      "position": [
-        2.96,
-        10.89
-      ],
+      "kind": "bush",
+      "position": [2.96, 10.89],
       "rotation": 192,
-      "scale": 0.98
-    },
-    {
-      "kind": "rock",
-      "position": [
-        5.57,
-        -13.85
-      ],
-      "rotation": 125,
-      "scale": 0.77
-    },
-    {
-      "kind": "rock",
-      "position": [
-        4.09,
-        11.93
-      ],
-      "rotation": 349,
-      "scale": 0.74
-    },
-    {
-      "kind": "rock",
-      "position": [
-        12.65,
-        5.85
-      ],
-      "rotation": 334,
-      "scale": 1.21
-    },
-    {
-      "kind": "rock",
-      "position": [
-        0.64,
-        -11.2
-      ],
-      "rotation": 341,
-      "scale": 1.27
-    },
-    {
-      "kind": "rock",
-      "position": [
-        -9.07,
-        0.67
-      ],
-      "rotation": 94,
       "scale": 1.04
     },
     {
-      "kind": "flower",
-      "position": [
-        12.72,
-        -1.87
-      ],
+      "kind": "bush",
+      "position": [-9.07, 0.67],
+      "rotation": 94,
+      "scale": 1.08
+    },
+    {
+      "kind": "rock",
+      "position": [12.72, -1.87],
       "rotation": 284,
       "scale": 1.29
     },
     {
-      "kind": "flower",
-      "position": [
-        0.84,
-        9.29
-      ],
-      "rotation": 121,
-      "scale": 0.8
-    },
-    {
-      "kind": "flower",
-      "position": [
-        -11.58,
-        -1.06
-      ],
-      "rotation": 147,
-      "scale": 1.28
-    },
-    {
-      "kind": "flower",
-      "position": [
-        6.42,
-        1.71
-      ],
-      "rotation": 128,
-      "scale": 1.29
-    },
-    {
-      "kind": "flower",
-      "position": [
-        -14.99,
-        -7.13
-      ],
+      "kind": "rock",
+      "position": [-14.99, -7.13],
       "rotation": 295,
-      "scale": 0.91
+      "scale": 0.84
     },
     {
-      "kind": "flower",
-      "position": [
-        -9.93,
-        -0.22
-      ],
-      "rotation": 306,
-      "scale": 1.21
-    },
-    {
-      "kind": "flower",
-      "position": [
-        -14.28,
-        -1.5
-      ],
+      "kind": "rock",
+      "position": [-14.28, -1.5],
       "rotation": 143,
-      "scale": 1.14
+      "scale": 1.1
     },
     {
-      "kind": "flower",
-      "position": [
-        12.65,
-        10.64
-      ],
+      "kind": "rock",
+      "position": [12.65, 10.64],
       "rotation": 269,
-      "scale": 0.82
+      "scale": 0.72
     },
     {
-      "kind": "flower",
-      "position": [
-        -7.24,
-        -13.92
-      ],
-      "rotation": 288,
-      "scale": 1.17
-    },
-    {
-      "kind": "flower",
-      "position": [
-        6.75,
-        -15.05
-      ],
+      "kind": "rock",
+      "position": [6.75, -15.05],
       "rotation": 315,
-      "scale": 0.87
+      "scale": 0.78
     },
     {
-      "kind": "flower",
-      "position": [
-        -12.05,
-        -3.3
-      ],
+      "kind": "rock",
+      "position": [-12.05, -3.3],
       "rotation": 35,
+      "scale": 1.18
+    },
+    {
+      "kind": "rock",
+      "position": [-7.2, 14.76],
+      "rotation": 67,
+      "scale": 1.16
+    },
+    {
+      "kind": "rock",
+      "position": [-16, 2.94],
+      "rotation": 209,
+      "scale": 1.25
+    },
+    {
+      "kind": "rock",
+      "position": [8.42, -2.09],
+      "rotation": 65,
       "scale": 1.2
     },
     {
       "kind": "flower",
-      "position": [
-        -7.2,
-        14.76
-      ],
-      "rotation": 67,
-      "scale": 1.19
-    },
-    {
-      "kind": "flower",
-      "position": [
-        -16,
-        2.94
-      ],
-      "rotation": 209,
-      "scale": 1.26
-    },
-    {
-      "kind": "flower",
-      "position": [
-        -10.68,
-        1.32
-      ],
-      "rotation": 285,
-      "scale": 1.07
-    },
-    {
-      "kind": "flower",
-      "position": [
-        8.42,
-        -2.09
-      ],
-      "rotation": 65,
-      "scale": 1.21
-    },
-    {
-      "kind": "flower",
-      "position": [
-        -1.39,
-        15.77
-      ],
+      "position": [-1.39, 15.77],
       "rotation": 29,
       "scale": 1.22
     },
     {
       "kind": "flower",
-      "position": [
-        -14.14,
-        0.43
-      ],
+      "position": [-14.14, 0.43],
       "rotation": 326,
       "scale": 0.89
     },
     {
       "kind": "flower",
-      "position": [
-        -12.99,
-        9.39
-      ],
+      "position": [-12.99, 9.39],
       "rotation": 163,
       "scale": 0.83
     },
     {
       "kind": "flower",
-      "position": [
-        -2.97,
-        8.69
-      ],
-      "rotation": 331,
-      "scale": 0.81
-    },
-    {
-      "kind": "flower",
-      "position": [
-        -14.53,
-        7.63
-      ],
+      "position": [-14.53, 7.63],
       "rotation": 40,
       "scale": 0.93
     },
     {
       "kind": "flower",
-      "position": [
-        -15.58,
-        0.45
-      ],
+      "position": [-6.97, -2.06],
+      "rotation": 55,
+      "scale": 0.88
+    },
+    {
+      "kind": "flower",
+      "position": [-15.58, 0.45],
       "rotation": 328,
       "scale": 1.27
     },
     {
       "kind": "flower",
-      "position": [
-        1.92,
-        -6.72
-      ],
+      "position": [1.92, -6.72],
       "rotation": 281,
       "scale": 1.2
     },
     {
       "kind": "flower",
-      "position": [
-        -0.05,
-        -15.43
-      ],
+      "position": [-0.05, -15.43],
       "rotation": 175,
       "scale": 0.98
     },
     {
       "kind": "flower",
-      "position": [
-        14.57,
-        3.15
-      ],
-      "rotation": 345,
-      "scale": 1.25
+      "position": [14.97, 3.32],
+      "rotation": 289,
+      "scale": 0.96
     },
     {
       "kind": "flower",
-      "position": [
-        -0.95,
-        -6.21
-      ],
-      "rotation": 169,
-      "scale": 0.94
+      "position": [15.22, -3.96],
+      "rotation": 26,
+      "scale": 1.18
     },
     {
       "kind": "flower",
-      "position": [
-        -3.13,
-        -14.58
-      ],
+      "position": [-8.27, 1.68],
+      "rotation": 56,
+      "scale": 0.81
+    },
+    {
+      "kind": "flower",
+      "position": [-3.13, -14.58],
       "rotation": 110,
       "scale": 1.04
     },
     {
       "kind": "flower",
-      "position": [
-        -0.95,
-        9.84
-      ],
+      "position": [-0.95, 9.84],
       "rotation": 190,
       "scale": 1
     },
     {
       "kind": "flower",
-      "position": [
-        -12.72,
-        2.89
-      ],
+      "position": [-12.72, 2.89],
       "rotation": 316,
       "scale": 1.03
+    },
+    {
+      "kind": "flower",
+      "position": [12.93, 1.78],
+      "rotation": 69,
+      "scale": 0.96
+    },
+    {
+      "kind": "flower",
+      "position": [4.6, 15.45],
+      "rotation": 142,
+      "scale": 1.13
+    },
+    {
+      "kind": "flower",
+      "position": [1.43, -7.6],
+      "rotation": 22,
+      "scale": 0.84
+    },
+    {
+      "kind": "flower",
+      "position": [4.69, -14.93],
+      "rotation": 332,
+      "scale": 1.3
+    },
+    {
+      "kind": "flower",
+      "position": [-0.36, 11.64],
+      "rotation": 148,
+      "scale": 1.1
+    },
+    {
+      "kind": "flower",
+      "position": [11.85, -3.73],
+      "rotation": 105,
+      "scale": 1.06
+    },
+    {
+      "kind": "flower",
+      "position": [-4.83, -15.54],
+      "rotation": 198,
+      "scale": 1.02
+    },
+    {
+      "kind": "flower",
+      "position": [3.68, 14.82],
+      "rotation": 124,
+      "scale": 0.91
+    },
+    {
+      "kind": "flower",
+      "position": [5.66, -14.49],
+      "rotation": 207,
+      "scale": 1.25
+    },
+    {
+      "kind": "flower",
+      "position": [-3.13, -12.06],
+      "rotation": 2,
+      "scale": 1.09
+    },
+    {
+      "kind": "flower",
+      "position": [-4.48, -13.39],
+      "rotation": 35,
+      "scale": 0.94
+    },
+    {
+      "kind": "flower",
+      "position": [-14.3, 5.22],
+      "rotation": 98,
+      "scale": 1.17
+    },
+    {
+      "kind": "flower",
+      "position": [4.45, 13.95],
+      "rotation": 324,
+      "scale": 0.92
+    },
+    {
+      "kind": "flower",
+      "position": [-2.47, -8.91],
+      "rotation": 49,
+      "scale": 0.81
     }
   ],
   "obstacles": [
     {
-      "position": [
-        -8.13,
-        -8.13
-      ],
-      "size": [
-        5.2,
-        4.6
-      ],
+      "position": [-8.13, -8.13],
+      "size": [5.2, 4.6],
       "rotation": 45
     },
     {
-      "position": [
-        8.13,
-        -8.13
-      ],
-      "size": [
-        4.8,
-        4.4
-      ],
+      "position": [8.13, -8.13],
+      "size": [4.8, 4.4],
       "rotation": -45
     },
     {
-      "position": [
-        8.13,
-        8.13
-      ],
-      "size": [
-        3.4,
-        1.2
-      ],
+      "position": [8.13, 8.13],
+      "size": [3.4, 1.2],
       "rotation": -135
     },
     {
-      "position": [
-        -8.13,
-        8.13
-      ],
-      "size": [
-        4,
-        4
-      ],
+      "position": [-8.13, 8.13],
+      "size": [4, 4],
       "rotation": 135
     },
     {
-      "position": [
-        0,
-        0
-      ],
-      "size": [
-        2.8,
-        2.8
-      ]
+      "position": [0, 0],
+      "size": [2.8, 2.8]
     },
     {
-      "position": [
-        2.47,
-        2.47
-      ],
-      "size": [
-        1.9,
-        0.8
-      ],
-      "rotation": 45
-    },
-    {
-      "position": [
-        -2.47,
-        2.47
-      ],
-      "size": [
-        1.9,
-        0.8
-      ],
-      "rotation": -45
-    },
-    {
-      "position": [
-        -2.47,
-        -2.47
-      ],
-      "size": [
-        1.9,
-        0.8
-      ],
-      "rotation": -135
-    },
-    {
-      "position": [
-        2.47,
-        -2.47
-      ],
-      "size": [
-        1.9,
-        0.8
-      ],
-      "rotation": -225
-    },
-    {
-      "position": [
-        -1.51,
-        11.41
-      ],
-      "size": [
-        1.13,
-        1.13
-      ],
-      "rotation": 288
-    },
-    {
-      "position": [
-        -10.92,
-        -1.81
-      ],
-      "size": [
-        0.96,
-        0.96
-      ],
-      "rotation": 93
-    },
-    {
-      "position": [
-        16.26,
-        2.92
-      ],
-      "size": [
-        1.38,
-        1.38
-      ],
-      "rotation": 291
-    },
-    {
-      "position": [
-        -0.92,
-        7.64
-      ],
-      "size": [
-        1.1,
-        1.1
-      ],
-      "rotation": 134
-    },
-    {
-      "position": [
-        15.84,
-        -2.49
-      ],
-      "size": [
-        0.94,
-        0.94
-      ],
+      "position": [5, 0],
+      "size": [1.9, 0.8],
       "rotation": 180
     },
     {
-      "position": [
-        0.27,
-        -7.68
-      ],
-      "size": [
-        0.95,
-        0.95
-      ],
-      "rotation": 310
+      "position": [0, 5],
+      "size": [1.9, 0.8],
+      "rotation": 90
     },
     {
-      "position": [
-        1.23,
-        15.33
-      ],
-      "size": [
-        1.1,
-        1.1
-      ],
+      "position": [-5, 0],
+      "size": [1.9, 0.8]
+    },
+    {
+      "position": [0, -5],
+      "size": [1.9, 0.8],
+      "rotation": -90
+    },
+    {
+      "position": [-1.51, 11.41],
+      "size": [1.13, 1.13],
+      "rotation": 288
+    },
+    {
+      "position": [-10.92, -1.81],
+      "size": [0.96, 0.96],
+      "rotation": 93
+    },
+    {
+      "position": [16.26, 2.92],
+      "size": [1.38, 1.38],
+      "rotation": 291
+    },
+    {
+      "position": [15.84, -2.49],
+      "size": [0.94, 0.94],
+      "rotation": 180
+    },
+    {
+      "position": [1.23, 15.33],
+      "size": [1.1, 1.1],
       "rotation": 296
     },
     {
-      "position": [
-        1.46,
-        12.17
-      ],
-      "size": [
-        1.23,
-        1.23
-      ],
+      "position": [1.46, 12.17],
+      "size": [1.23, 1.23],
       "rotation": 207
     },
     {
-      "position": [
-        -11.57,
-        0.69
-      ],
-      "size": [
-        1.2,
-        1.2
-      ],
+      "position": [-11.57, 0.69],
+      "size": [1.2, 1.2],
       "rotation": 105
     },
     {
-      "position": [
-        -5.31,
-        -14.66
-      ],
-      "size": [
-        1.07,
-        1.07
-      ],
+      "position": [-5.31, -14.66],
+      "size": [1.07, 1.07],
       "rotation": 333
     },
     {
-      "position": [
-        -1.96,
-        14.75
-      ],
-      "size": [
-        1.3,
-        1.3
-      ],
+      "position": [-1.96, 14.75],
+      "size": [1.3, 1.3],
       "rotation": 182
     },
     {
-      "position": [
-        14.03,
-        -0.41
-      ],
-      "size": [
-        0.95,
-        0.95
-      ],
+      "position": [14.03, -0.41],
+      "size": [0.95, 0.95],
       "rotation": 309
     },
     {
-      "position": [
-        -7.24,
-        -1.34
-      ],
-      "size": [
-        0.98,
-        0.98
-      ],
-      "rotation": 285
-    },
-    {
-      "position": [
-        8.48,
-        2.21
-      ],
-      "size": [
-        0.99,
-        0.99
-      ],
+      "position": [8.48, 2.21],
+      "size": [0.99, 0.99],
       "rotation": 347
     },
     {
-      "position": [
-        -4.65,
-        15.04
-      ],
-      "size": [
-        1.33,
-        1.33
-      ],
+      "position": [-4.65, 15.04],
+      "size": [1.33, 1.33],
       "rotation": 273
     },
     {
-      "position": [
-        11.83,
-        1.95
-      ],
-      "size": [
-        1.3,
-        1.3
-      ],
+      "position": [11.83, 1.95],
+      "size": [1.3, 1.3],
       "rotation": 14
     },
     {
-      "position": [
-        -14.16,
-        -5.41
-      ],
-      "size": [
-        1.3,
-        1.3
-      ],
+      "position": [-14.16, -5.41],
+      "size": [1.3, 1.3],
       "rotation": 1
     },
     {
-      "position": [
-        -0.03,
-        -13.81
-      ],
-      "size": [
-        1.23,
-        1.23
-      ],
+      "position": [-0.03, -13.81],
+      "size": [1.23, 1.23],
       "rotation": 227
     },
     {
-      "position": [
-        15.53,
-        5.76
-      ],
-      "size": [
-        1.34,
-        1.34
-      ],
+      "position": [15.53, 5.76],
+      "size": [1.34, 1.34],
       "rotation": 64
     },
     {
-      "position": [
-        -15.28,
-        6.43
-      ],
-      "size": [
-        1.28,
-        1.28
-      ],
+      "position": [-15.28, 6.43],
+      "size": [1.28, 1.28],
       "rotation": 28
     },
     {
-      "position": [
-        11.25,
-        -2.48
-      ],
-      "size": [
-        1.16,
-        1.16
-      ],
+      "position": [11.25, -2.48],
+      "size": [1.16, 1.16],
       "rotation": 131
     },
     {
-      "position": [
-        12.87,
-        4.13
-      ],
-      "size": [
-        1.28,
-        1.28
-      ],
+      "position": [0.32, -9.49],
+      "size": [1.09, 1.09],
+      "rotation": 338
+    },
+    {
+      "position": [12.87, 4.13],
+      "size": [1.28, 1.28],
       "rotation": 251
     },
     {
-      "position": [
-        2.78,
-        13.6
-      ],
-      "size": [
-        1.24,
-        1.24
-      ],
-      "rotation": 147
+      "position": [-2.32, -11.09],
+      "size": [1.01, 1.01],
+      "rotation": 93
     },
     {
-      "position": [
-        10.31,
-        2.74
-      ],
-      "size": [
-        0.98,
-        0.98
-      ],
-      "rotation": 228
+      "position": [1.3, 8.42],
+      "size": [1.16, 1.16],
+      "rotation": 102
     },
     {
-      "position": [
-        1.99,
-        -12.03
-      ],
-      "size": [
-        1.24,
-        1.24
-      ],
-      "rotation": 200
+      "position": [12.72, -1.87],
+      "size": [1.29, 1.29],
+      "rotation": 284
     },
     {
-      "position": [
-        2.96,
-        10.89
-      ],
-      "size": [
-        0.98,
-        0.98
-      ],
-      "rotation": 192
+      "position": [-14.99, -7.13],
+      "size": [0.84, 0.84],
+      "rotation": 295
     },
     {
-      "position": [
-        5.57,
-        -13.85
-      ],
-      "size": [
-        0.77,
-        0.77
-      ],
-      "rotation": 125
+      "position": [-14.28, -1.5],
+      "size": [1.1, 1.1],
+      "rotation": 143
     },
     {
-      "position": [
-        4.09,
-        11.93
-      ],
-      "size": [
-        0.74,
-        0.74
-      ],
-      "rotation": 349
+      "position": [12.65, 10.64],
+      "size": [0.72, 0.72],
+      "rotation": 269
     },
     {
-      "position": [
-        12.65,
-        5.85
-      ],
-      "size": [
-        1.21,
-        1.21
-      ],
-      "rotation": 334
+      "position": [6.75, -15.05],
+      "size": [0.78, 0.78],
+      "rotation": 315
     },
     {
-      "position": [
-        0.64,
-        -11.2
-      ],
-      "size": [
-        1.27,
-        1.27
-      ],
-      "rotation": 341
+      "position": [-12.05, -3.3],
+      "size": [1.18, 1.18],
+      "rotation": 35
     },
     {
-      "position": [
-        -9.07,
-        0.67
-      ],
-      "size": [
-        1.04,
-        1.04
-      ],
-      "rotation": 94
+      "position": [-7.2, 14.76],
+      "size": [1.16, 1.16],
+      "rotation": 67
+    },
+    {
+      "position": [-16, 2.94],
+      "size": [1.25, 1.25],
+      "rotation": 209
+    },
+    {
+      "position": [8.42, -2.09],
+      "size": [1.2, 1.2],
+      "rotation": 65
     }
   ]
 }

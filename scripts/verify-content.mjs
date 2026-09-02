@@ -144,16 +144,6 @@ for (let i = 0; i < world.zones.length; i += 1) {
   }
 }
 
-// O ponto de partida não pode nascer dentro de um obstáculo.
-const PLAYER_RADIUS = 0.45;
-for (const obstacle of world.obstacles) {
-  const dx = Math.abs(world.spawn[0] - obstacle.position[0]) - obstacle.size[0] / 2;
-  const dz = Math.abs(world.spawn[1] - obstacle.position[1]) - obstacle.size[1] / 2;
-  if (dx < PLAYER_RADIUS && dz < PLAYER_RADIUS) {
-    fail(`spawn ${JSON.stringify(world.spawn)} está dentro de um obstáculo`);
-  }
-}
-
 // Todo prédio precisa de colisor, senão dá para atravessá-lo.
 for (const zone of world.zones) {
   const covered = world.obstacles.some(
@@ -162,6 +152,116 @@ for (const zone of world.zones) {
       Math.abs(obstacle.position[1] - zone.position[1]) < 0.01,
   );
   if (!covered) warn(`zona "${zone.sectionId}" não tem obstáculo — o prédio é atravessável`);
+}
+
+/*
+ * Navegabilidade.
+ *
+ * O personagem já ficou preso a caminho das construções duas vezes, sempre pelo
+ * mesmo motivo: algo com colisão em cima do trajeto. Primeiro os bancos, que
+ * estavam sobre as diagonais por onde passam os caminhos; depois a própria
+ * fonte, no centro exato para onde o piloto automático se dirigia.
+ *
+ * Em vez de medir distâncias e torcer para a conta estar certa, esta checagem
+ * percorre o trajeto de verdade — o mesmo que o piloto faz — testando cada
+ * passo com a mesma matemática de colisão do jogo. Se o caminho não é
+ * transitável, o build falha.
+ */
+
+const PLAYER_RADIUS_NAV = 0.45;
+
+/** De quanto em quanto o trajeto é amostrado, em unidades de mundo. */
+const STEP = 0.25;
+
+/** Igual a `circleHitsBox` em src/game/collision.ts. */
+function hits(x, z, radius, obstacle) {
+  const radians = ((obstacle.rotation ?? 0) * Math.PI) / 180;
+  const cos = Math.cos(-radians);
+  const sin = Math.sin(-radians);
+
+  let localX = x - obstacle.position[0];
+  let localZ = z - obstacle.position[1];
+
+  if (radians !== 0) {
+    const rotatedX = localX * cos - localZ * sin;
+    localZ = localX * sin + localZ * cos;
+    localX = rotatedX;
+  }
+
+  const halfX = obstacle.size[0] / 2;
+  const halfZ = obstacle.size[1] / 2;
+
+  const dx = localX - Math.max(-halfX, Math.min(halfX, localX));
+  const dz = localZ - Math.max(-halfZ, Math.min(halfZ, localZ));
+
+  return dx * dx + dz * dz < radius * radius;
+}
+
+/** O que bloqueia o ponto, ignorando a construção de destino. */
+function blockedBy(x, z, exceptZone) {
+  for (const obstacle of world.obstacles) {
+    if (exceptZone) {
+      const isTarget =
+        Math.abs(obstacle.position[0] - exceptZone.position[0]) < 0.01 &&
+        Math.abs(obstacle.position[1] - exceptZone.position[1]) < 0.01;
+      if (isTarget) continue;
+    }
+    if (hits(x, z, PLAYER_RADIUS_NAV, obstacle)) return obstacle;
+  }
+  return null;
+}
+
+const ring = world.island.plazaRing;
+
+// 1. Dá para dar a volta completa na fonte pelo anel?
+for (let i = 0; i < 180; i += 1) {
+  const angle = (i / 180) * Math.PI * 2;
+  const x = Math.sin(angle) * ring;
+  const z = Math.cos(angle) * ring;
+
+  const blocker = blockedBy(x, z, null);
+  if (blocker) {
+    fail(
+      `anel da praça intransitável em ${Math.round((angle * 180) / Math.PI)}°: ` +
+        `colisor em ${JSON.stringify(blocker.position)}`,
+    );
+    break;
+  }
+}
+
+// 2. Dá para ir do anel até a frente de cada construção?
+for (const zone of world.zones) {
+  const [zx, zz] = zone.position;
+  const length = Math.hypot(zx, zz);
+  const unit = [zx / length, zz / length];
+
+  const halfFootprint = Math.max(zone.building.footprint[0], zone.building.footprint[1]) / 2;
+  const standoff = (halfFootprint + 0.6 + zone.radius) / 2;
+  const stop = Math.max(length - standoff, ring);
+
+  let blocked = false;
+  for (let distance = ring; distance <= stop && !blocked; distance += STEP) {
+    const blocker = blockedBy(unit[0] * distance, unit[1] * distance, zone);
+    if (blocker) {
+      fail(
+        `caminho para "${zone.sectionId}" bloqueado a ${distance.toFixed(1)} do centro: ` +
+          `colisor em ${JSON.stringify(blocker.position)}`,
+      );
+      blocked = true;
+    }
+  }
+
+  // O ponto de parada precisa acionar o gatilho, senão o piloto chega e não abre nada.
+  const stopX = unit[0] * stop;
+  const stopZ = unit[1] * stop;
+  if (Math.hypot(stopX - zx, stopZ - zz) >= zone.radius) {
+    fail(`o fim do caminho para "${zone.sectionId}" fica fora do gatilho da zona`);
+  }
+}
+
+// 3. O ponto de partida está livre?
+if (blockedBy(world.spawn[0], world.spawn[1], null)) {
+  fail(`spawn ${JSON.stringify(world.spawn)} está dentro de um obstáculo`);
 }
 
 // ---------------------------------------------------------------- relatório ---
