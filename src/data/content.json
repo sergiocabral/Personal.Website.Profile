@@ -1,0 +1,258 @@
+{
+  "profile": {
+    "name": "Sergio Cabral",
+    "birthDate": "1982-07-01",
+    "role": {
+      "pt-BR": "Desenvolvedor",
+      "en": "Developer"
+    },
+    "url": "https://sergiocabral.dev/",
+    "siteName": "sergiocabral.dev",
+    "seo": {
+      "title": {
+        "pt-BR": "Sergio Cabral — Desenvolvedor",
+        "en": "Sergio Cabral — Developer"
+      },
+      "description": {
+        "pt-BR": "Desenvolvedor sênior full stack. Explore o mapa para encontrar meus contatos, redes sociais e projetos.",
+        "en": "Senior full stack developer. Explore the map to find my contacts, social networks and projects."
+      },
+      "ogImage": "/opengraph.jpg"
+    }
+  },
+  "theme": {
+    "browserColor": "#FFD602",
+    "accentColor": "#1AF1F2"
+  },
+  "sections": [
+    {
+      "id": "contacts",
+      "label": {
+        "pt-BR": "Contatos",
+        "en": "Contacts"
+      },
+      "icon": "phone-volume",
+      "iconStyle": "solid",
+      "dialog": {
+        "greeting": {
+          "pt-BR": "Quer falar comigo? Escolha o canal que preferir — eu respondo em todos.",
+          "en": "Want to reach me? Pick whichever channel you prefer — I answer on all of them."
+        }
+      },
+      "links": [
+        {
+          "name": "The Loop",
+          "url": "https://loop.cabral.dev/",
+          "icon": "infinity",
+          "iconStyle": "solid",
+          "description": {
+            "pt-BR": "Minhas páginas pessoais",
+            "en": "My personal pages"
+          }
+        },
+        {
+          "name": "Email",
+          "url": "mailto:contact@sergiocabral.dev",
+          "icon": "envelope",
+          "iconStyle": "regular",
+          "description": {
+            "pt-BR": "contact@sergiocabral.dev",
+            "en": "contact@sergiocabral.dev"
+          }
+        },
+        {
+          "name": "Whatsapp",
+          "url": "https://wa.me/5522981842500",
+          "icon": "whatsapp",
+          "iconStyle": "brands"
+        },
+        {
+          "name": "Telegram",
+          "url": "https://t.me/sergiocabral_dev",
+          "icon": "telegram",
+          "iconStyle": "brands"
+        },
+        {
+          "name": "Discord",
+          "url": "https://discord.gg/Fv85jcEEp3",
+          "icon": "discord",
+          "iconStyle": "brands"
+        },
+        {
+          "name": "Guilded",
+          "url": "https://www.guilded.gg/i/VkX8nblk",
+          "icon": "guilded",
+          "iconStyle": "brands"
+        }
+      ]
+    },
+    {
+      "id": "social",
+      "label": {
+        "pt-BR": "Redes Sociais",
+        "en": "Social Networks"
+      },
+      "icon": "globe-americas",
+      "iconStyle": "solid",
+      "dialog": {
+        "greeting": {
+          "pt-BR": "A antena alcança o mundo todo. É por aqui que eu apareço na internet.",
+          "en": "This antenna reaches the whole world. These are the places I show up on the internet."
+        }
+      },
+      "links": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/sergiocabral",
+          "icon": "github",
+          "iconStyle": "brands",
+          "description": {
+            "pt-BR": "Meu código aberto",
+            "en": "My open source code"
+          }
+        },
+        {
+          "name": "StackOverflow",
+          "url": "https://stackexchange.com/users/1488902/sergio-cabral",
+          "icon": "stack-overflow",
+          "iconStyle": "brands"
+        },
+        {
+          "name": "LinkedIn",
+          "url": "https://www.linkedin.com/in/sergiocabraljr",
+          "icon": "linkedin",
+          "iconStyle": "brands"
+        },
+        {
+          "name": "Twitch",
+          "url": "https://www.twitch.tv/sergiocabral_dev",
+          "icon": "twitch",
+          "iconStyle": "brands",
+          "description": {
+            "pt-BR": "Live coding de segunda a sexta",
+            "en": "Live coding Monday to Friday"
+          }
+        },
+        {
+          "name": "YouTube",
+          "url": "https://www.youtube.com/channel/UCBBmSw69UpBbncKM2Xbw-hQ/videos",
+          "icon": "youtube",
+          "iconStyle": "brands"
+        },
+        {
+          "name": "Instagram",
+          "url": "https://www.instagram.com/sergiocabral.dev/",
+          "icon": "instagram",
+          "iconStyle": "brands"
+        },
+        {
+          "name": "Facebook",
+          "url": "https://www.facebook.com/sergiocabraljr",
+          "icon": "facebook-f",
+          "iconStyle": "brands"
+        },
+        {
+          "name": "Twitter",
+          "url": "https://twitter.com/sergiocabraldev",
+          "icon": "twitter",
+          "iconStyle": "brands"
+        },
+        {
+          "name": "about.me",
+          "url": "https://about.me/sergiocabral",
+          "icon": "address-card",
+          "iconStyle": "regular"
+        }
+      ]
+    },
+    {
+      "id": "projects",
+      "label": {
+        "pt-BR": "Meus Projetos",
+        "en": "My Projects"
+      },
+      "icon": "cogs",
+      "iconStyle": "solid",
+      "dialog": {
+        "greeting": {
+          "pt-BR": "Bem-vindo à oficina. Cada andar daqui é uma ideia que virou site.",
+          "en": "Welcome to the workshop. Every floor here is an idea that became a website."
+        }
+      },
+      "links": [
+        {
+          "name": "I Don't Need It",
+          "url": "https://idontneedit.org/",
+          "icon": "money-bill",
+          "iconStyle": "solid",
+          "description": {
+            "pt-BR": "Pense antes de comprar",
+            "en": "Think before you buy"
+          }
+        },
+        {
+          "name": "E-Books",
+          "url": "https://ebooks.sergiocabral.com/",
+          "icon": "book",
+          "iconStyle": "solid"
+        },
+        {
+          "name": "Fotografias",
+          "url": "https://fotos.sergiocabral.com/",
+          "icon": "camera-retro",
+          "iconStyle": "solid",
+          "description": {
+            "pt-BR": "Fotos que eu tirei",
+            "en": "Photos I have taken"
+          }
+        },
+        {
+          "name": "Git Playground",
+          "url": "https://git.sergiocabral.com/",
+          "icon": "git-alt",
+          "iconStyle": "brands",
+          "description": {
+            "pt-BR": "Aprenda Git na prática",
+            "en": "Learn Git hands-on"
+          }
+        },
+        {
+          "name": "Loto Number",
+          "url": "https://sorteios.sergiocabral.com/",
+          "icon": "sort-numeric-down",
+          "iconStyle": "solid"
+        },
+        {
+          "name": "Read Quickly",
+          "url": "https://quickly.sergiocabral.com/",
+          "icon": "glasses",
+          "iconStyle": "solid",
+          "description": {
+            "pt-BR": "Leitura dinâmica no navegador",
+            "en": "Speed reading in the browser"
+          }
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "label": {
+        "pt-BR": "Quem Sou Eu?",
+        "en": "Who Am I?"
+      },
+      "icon": "id-card",
+      "iconStyle": "solid",
+      "dialog": {
+        "greeting": {
+          "pt-BR": "Ah, você achou a placa. Deixa eu me apresentar direito.",
+          "en": "Ah, you found the sign. Let me introduce myself properly."
+        },
+        "body": {
+          "pt-BR": "🍕 Não me lembro bem quando comecei a me aventurar com códigos e programação, 👶 talvez nos meus 13 anos. Mas hoje tenho {age}? 👨‍🦳\n\n🏁 Hoje em dia trabalho como **desenvolvedor sênior full stack** 😎 lidando com C#, SQL, JavaScript e TypeScript.\n\n👽 Mas você me encontra **de segunda a sexta na Twitch** 📺, quando faço live coding com um assunto pra cada dia.",
+          "en": "🍕 I don't quite remember when I started tinkering with code, 👶 maybe around the age of 13. And today I'm {age}? 👨‍🦳\n\n🏁 These days I work as a **senior full stack developer** 😎 dealing with C#, SQL, JavaScript and TypeScript.\n\n👽 But you can find me **on Twitch from Monday to Friday** 📺, doing live coding with a different topic each day."
+        }
+      },
+      "links": []
+    }
+  ]
+}
