@@ -14,7 +14,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
-    "verify:content": "node scripts/verify-content.mjs"
+    "verify:content": "node scripts/verify-content.mjs",
+    "test": "node --test \"src/**/*.test.mjs\""
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.3.1",

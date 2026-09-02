@@ -5,12 +5,13 @@ import { world } from '../data';
 import { useGameStore } from '../store/gameStore';
 import { clampToBounds, slideMove, toBoxes } from './collision';
 import {
-  CAMERA_YAW,
   PLAYER_ACCEL,
   PLAYER_FRICTION,
   PLAYER_HEIGHT,
   PLAYER_RADIUS,
   PLAYER_SPEED,
+  SCREEN_FORWARD,
+  SCREEN_RIGHT,
   TURN_DAMPING,
   ZONE_HYSTERESIS,
 } from './constants';
@@ -57,12 +58,11 @@ export function Player({ input, position }: Props) {
     const moving = desiredX !== 0 || desiredY !== 0;
 
     if (moving) {
-      // O input é relativo à tela; girar por CAMERA_YAW faz "para cima" na tela
-      // virar "para longe da câmera" no mundo.
-      const cos = Math.cos(CAMERA_YAW);
-      const sin = Math.sin(CAMERA_YAW);
-      const worldX = desiredX * cos - desiredY * sin;
-      const worldZ = desiredX * sin + desiredY * cos;
+      // O input chega em eixos de tela (x para a direita, y para baixo) e é
+      // convertido para o mundo pela base derivada da câmera. O y é invertido
+      // porque "para cima na tela" é o sentido positivo de SCREEN_FORWARD.
+      const worldX = SCREEN_RIGHT[0] * desiredX - SCREEN_FORWARD[0] * desiredY;
+      const worldZ = SCREEN_RIGHT[1] * desiredX - SCREEN_FORWARD[1] * desiredY;
 
       const blend = 1 - Math.exp(-PLAYER_ACCEL * delta);
       velocity.current.x += (worldX * PLAYER_SPEED - velocity.current.x) * blend;

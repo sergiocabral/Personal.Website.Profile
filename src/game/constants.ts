@@ -1,8 +1,24 @@
-/** Ângulo de rotação do mundo em torno de Y para a vista isométrica clássica (45°). */
-export const CAMERA_YAW = Math.PI / 4;
-
 /** Direção da câmera, normalizada. Multiplicada pela distância vira a posição. */
 export const CAMERA_DIRECTION: [number, number, number] = [1, 1.15, 1];
+
+/**
+ * Eixos da tela projetados no chão, derivados da posição da câmera.
+ *
+ * São calculados a partir de CAMERA_DIRECTION em vez de um ângulo escrito à mão:
+ * assim, mudar o ângulo da câmera nunca dessincroniza os controles. Antes havia
+ * um yaw fixo aqui, com o sinal trocado — a seta para cima andava para a direita.
+ *
+ * FORWARD é a direção que se afasta da câmera (o "para cima" da tela) e RIGHT é
+ * o produto vetorial dela com o eixo vertical.
+ */
+const GROUND_LENGTH = Math.hypot(CAMERA_DIRECTION[0], CAMERA_DIRECTION[2]);
+
+export const SCREEN_FORWARD: [number, number] = [
+  -CAMERA_DIRECTION[0] / GROUND_LENGTH,
+  -CAMERA_DIRECTION[2] / GROUND_LENGTH,
+];
+
+export const SCREEN_RIGHT: [number, number] = [-SCREEN_FORWARD[1], SCREEN_FORWARD[0]];
 
 /** Distância da câmera ao alvo. Só afeta o clipping — o zoom controla o tamanho. */
 export const CAMERA_DISTANCE = 28;
