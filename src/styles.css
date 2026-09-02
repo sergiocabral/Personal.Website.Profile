@@ -804,11 +804,12 @@ button {
 /*
  * Retrato giratório, herdado do site anterior.
  *
- * A rotação dá duas voltas por ciclo e a foto de cima aparece e some no meio
- * dele — assim a troca acontece com a imagem já em movimento, e a transição não
- * tem um instante em que as duas fotos aparecem paradas uma sobre a outra.
+ * A rotação dá duas voltas por ciclo, e a foto aparece sobre o ícone no meio
+ * dele — a troca acontece com a imagem já em movimento, então nunca há um
+ * instante com as duas paradas uma sobre a outra.
  *
- * O ciclo é longo de propósito: é um detalhe para quem fica, não um chamariz.
+ * O ícone fica na base porque é a identidade, e é o que se vê primeiro. O ciclo
+ * é longo de propósito: é um detalhe para quem fica, não um chamariz.
  */
 .avatar {
   position: relative;
@@ -831,7 +832,7 @@ button {
   animation: avatar-spin 90s linear infinite;
 }
 
-.avatar__face--secondary {
+.avatar__face--photo {
   animation:
     avatar-spin 90s linear infinite,
     avatar-swap 90s ease-in-out infinite;
@@ -862,12 +863,12 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  /* A rotação sai; a troca de foto fica, porque é lenta e não desloca nada. */
+  /* A rotação sai; a troca fica, porque é lenta e não desloca nada. */
   .avatar__face {
     animation: none;
   }
 
-  .avatar__face--secondary {
+  .avatar__face--photo {
     animation: avatar-swap 90s ease-in-out infinite;
   }
 }

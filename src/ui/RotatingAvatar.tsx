@@ -1,17 +1,18 @@
-import primary from '../assets/profile-primary.jpg';
-import secondary from '../assets/profile-secondary.jpg';
+import photo from '../assets/profile-primary.jpg';
+import icon from '../assets/profile-secondary.jpg';
 
 /**
- * Avatar que gira devagar alternando entre duas fotos.
+ * Retrato que gira devagar, alternando entre o ícone e a foto.
  *
  * O efeito vem do site anterior e foi recriado aqui: duas imagens sobrepostas,
- * uma girando continuamente e a de cima aparecendo e sumindo, com um halo na
- * cor de destaque. A graça está na lentidão — quem chega vê uma foto parada, e
- * só quem fica percebe que ela mudou.
+ * girando juntas, com a de cima aparecendo e sumindo.
  *
- * A rotação para inteira com `prefers-reduced-motion`, mas a troca de foto
- * continua: ela é lenta o bastante para não incomodar quem pediu menos
- * movimento, e é o que dá vida ao retrato.
+ * A ordem importa. O ícone é a identidade — a silhueta em amarelo e preto que
+ * as pessoas reconhecem —, então é ele que fica na base e é o primeiro a
+ * aparecer. A foto entra por cima, no meio do ciclo, e volta a sair.
+ *
+ * A lentidão é proposital: quem passa vê um retrato parado, e só quem fica
+ * percebe que ele mudou.
  */
 export function RotatingAvatar({
   size = '5.5rem',
@@ -25,8 +26,8 @@ export function RotatingAvatar({
       className={`avatar${className ? ` ${className}` : ''}`}
       style={{ width: size, height: size }}
     >
-      <img className="avatar__face avatar__face--primary" src={primary} alt="" />
-      <img className="avatar__face avatar__face--secondary" src={secondary} alt="" />
+      <img className="avatar__face avatar__face--icon" src={icon} alt="" />
+      <img className="avatar__face avatar__face--photo" src={photo} alt="" />
     </div>
   );
 }

@@ -27,20 +27,20 @@ const { profile } = content;
 /*
  * O retrato no HTML estático.
  *
- * Só a foto principal, com o caminho que o Vite gerou para ela. O efeito de
- * troca depende das duas imagens empacotadas e começa quando o React assume;
- * quem vê apenas o HTML — um crawler, por exemplo — recebe um retrato parado,
- * que é o suficiente.
+ * Apenas o ícone, que é o primeiro quadro do efeito — a foto entra por cima
+ * quando o React assume. Quem vê só o HTML, como um crawler, recebe um retrato
+ * parado, que é o suficiente.
+ *
+ * As imagens são importadas pelo JavaScript e não aparecem no HTML, então o
+ * caminho com hash vem da pasta de assets que o Vite acabou de gerar.
  */
 const avatarUrl = (() => {
-  // A imagem é importada pelo JavaScript, então não aparece no HTML: o caminho
-  // com hash tem que vir da pasta de assets que o Vite acabou de gerar.
   const file = readdirSync(resolve(dist, 'assets')).find((name) =>
-    name.startsWith('profile-primary-'),
+    name.startsWith('profile-secondary-'),
   );
 
   if (!file) {
-    console.warn('  aviso: retrato não encontrado em dist/assets');
+    console.warn('  aviso: ícone do retrato não encontrado em dist/assets');
     return profile.seo.ogImage;
   }
 
@@ -159,7 +159,7 @@ function homeBody() {
   return `<main class="info"><div class="info__inner frame">
   <header class="info__header">
     <div class="avatar" style="width:5.5rem;height:5.5rem">
-      <img class="avatar__face avatar__face--primary" src="${avatarUrl}" alt="" />
+      <img class="avatar__face avatar__face--icon" src="${avatarUrl}" alt="" />
     </div>
     <div class="info__identity">
       <h1>${escape(profile.name)}</h1>
