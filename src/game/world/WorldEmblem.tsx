@@ -21,13 +21,13 @@ import icon from '../../assets/profile-secondary.jpg';
 const SIZE = 512;
 
 /** Verde escuro da figura, no tom de "grama aparada mais rente". */
-const FIGURE = [46, 74, 32] as const;
+const FIGURE = [24, 40, 18] as const;
 
 /** Abaixo deste brilho, o pixel é figura; acima, é fundo. */
 const FIGURE_THRESHOLD = 110;
 
 /** Onde a máscara circular começa e termina de apagar (0 = centro, 1 = borda). */
-const FADE_START = 0.82;
+const FADE_START = 0.9;
 const FADE_END = 1;
 
 /**
@@ -37,10 +37,10 @@ const FADE_END = 1;
  * ângulo isométrico, ela apareça de pé em vez de deitada. É um valor de ajuste
  * fino: se o rosto ficar de lado, é só girar por múltiplos de meia volta.
  */
-const EMBLEM_ROTATION = -Math.PI / 4;
+const EMBLEM_ROTATION = Math.PI / 4;
 
 /** Intensidade final. Bem baixa de propósito — o emblema é um sussurro. */
-const EMBLEM_OPACITY = 0.28;
+const EMBLEM_OPACITY = 0.5;
 
 function smoothstep(edge0: number, edge1: number, value: number): number {
   const t = Math.min(1, Math.max(0, (value - edge0) / (edge1 - edge0)));
@@ -114,14 +114,28 @@ export function WorldEmblem() {
   const texture = useEmblemTexture();
   if (!texture) return null;
 
-  const radius = world.island.grassRadius * 0.96;
+  const radius = world.island.grassRadius * 1.0;
 
   return (
-    <mesh rotation={[-Math.PI / 2, 0, EMBLEM_ROTATION]} position={[0, 0.02, 0]}>
+    <mesh rotation={[-Math.PI / 2, 0, EMBLEM_ROTATION]} position={[0, 0.02, 0]} renderOrder={1}>
       <circleGeometry args={[radius, 64]} />
-      {/* depthWrite desligado: é uma decalcomania de chão, não deve interferir
-          na profundidade de nada que passe por cima. */}
-      <meshBasicMaterial map={texture} transparent opacity={EMBLEM_OPACITY} depthWrite={false} />
+      {/*
+       * depthWrite desligado para não interferir na profundidade de nada que
+       * passe por cima. O polygonOffset é o que mata a cintilação: várias
+       * sombras pintadas (árvores, prédios) ficam exatamente nesta mesma altura,
+       * e duas superfícies coplanares disputam a profundidade pixel a pixel,
+       * piscando quando a câmera se mexe. O offset dá ao emblema uma vantagem
+       * fixa nessa disputa, sem tirá-lo de trás do cavalo nem dos prédios.
+       */}
+      <meshBasicMaterial
+        map={texture}
+        transparent
+        opacity={EMBLEM_OPACITY}
+        depthWrite={false}
+        polygonOffset
+        polygonOffsetFactor={-2}
+        polygonOffsetUnits={-2}
+      />
     </mesh>
   );
 }
