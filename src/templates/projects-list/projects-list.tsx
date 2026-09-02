@@ -58,7 +58,7 @@ export const Projects = (props: ProjectsProps) => {
               ? <ul className='links'>
                   {section.content.map((link, linkIndex) => (
                     <li key={section.name + sectionIndex + linkIndex}>
-                      <a href={link.url} target="_blank" description={link.name}>
+                      <a href={link.url} target="_blank" rel="noopener noreferrer" description={link.name}>
                         <span><FontAwesomeIcon icon={icons[iconName(link.icon)]}/></span>
                       </a>
                     </li>
