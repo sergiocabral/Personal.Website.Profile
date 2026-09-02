@@ -1,13 +1,12 @@
 import { useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
-import { Group, MathUtils, Mesh } from 'three';
+import { type Group, MathUtils, type Mesh } from 'three';
 import { world } from '../data';
 import { useGameStore } from '../store/gameStore';
 import { clampToBounds, slideMove, toBoxes } from './collision';
 import {
   PLAYER_ACCEL,
   PLAYER_FRICTION,
-  PLAYER_HEIGHT,
   PLAYER_RADIUS,
   PLAYER_SPEED,
   SCREEN_FORWARD,
@@ -16,11 +15,10 @@ import {
   ZONE_HYSTERESIS,
 } from './constants';
 import type { InputState } from './input/useInput';
+import { PALETTE } from './palette';
 
 /** Posição do personagem, lida pela câmera sem passar pelo estado do React. */
 export type PlayerRef = { x: number; z: number };
-
-const ACCENT = '#1AF1F2';
 
 type Props = {
   input: React.RefObject<InputState>;
@@ -28,15 +26,21 @@ type Props = {
 };
 
 /**
- * Personagem e toda a sua simulação.
+ * O personagem e toda a sua simulação.
  *
- * A geometria é procedural de propósito: um boneco simples de cápsula e esferas
- * mantém o estilo coeso com os prédios (também procedurais), não custa download
- * nenhum e evita depender de um modelo externo para o site funcionar.
+ * As proporções são chibi — cabeça quase do tamanho do tronco — que é o que faz
+ * um boneco simples parecer um personagem em vez de um manequim. Braços e
+ * pernas são animados por seno em contrafase, o suficiente para ler como
+ * caminhada sem esqueleto nem modelo baixado.
  */
 export function Player({ input, position }: Props) {
   const group = useRef<Group>(null);
-  const bobbing = useRef<Mesh>(null);
+  const body = useRef<Group>(null);
+  const legLeft = useRef<Mesh>(null);
+  const legRight = useRef<Mesh>(null);
+  const armLeft = useRef<Mesh>(null);
+  const armRight = useRef<Mesh>(null);
+  const head = useRef<Group>(null);
 
   const boxes = useMemo(() => toBoxes(world.obstacles), []);
   const velocity = useRef({ x: 0, z: 0 });
@@ -44,7 +48,7 @@ export function Player({ input, position }: Props) {
 
   const setActiveZone = useGameStore((state) => state.setActiveZone);
 
-  useFrame((_, rawDelta) => {
+  useFrame((state, rawDelta) => {
     const node = group.current;
     if (!node) return;
 
@@ -99,35 +103,137 @@ export function Player({ input, position }: Props) {
       );
     }
 
-    // Balanço vertical proporcional à velocidade: sugere passos sem esqueleto animado.
-    walkPhase.current += speed * delta * 3.2;
-    if (bobbing.current) {
-      const amount = Math.min(speed / PLAYER_SPEED, 1);
-      bobbing.current.position.y = Math.abs(Math.sin(walkPhase.current)) * 0.12 * amount;
-      bobbing.current.rotation.z = Math.sin(walkPhase.current) * 0.06 * amount;
-    }
+    animate(
+      { body, head, legLeft, legRight, armLeft, armRight },
+      speed,
+      walkPhase,
+      delta,
+      state.clock.elapsedTime,
+    );
 
     detectZone(position.current, setActiveZone);
   });
 
   return (
     <group ref={group} position={[world.spawn[0], 0, world.spawn[1]]}>
-      <mesh ref={bobbing} castShadow={false} position={[0, PLAYER_HEIGHT, 0]}>
-        <capsuleGeometry args={[0.32, 0.5, 4, 12]} />
-        <meshStandardMaterial color="#f2f5f7" roughness={0.55} metalness={0.05} />
-      </mesh>
+      <group ref={body}>
+        {/* Pernas curtas e grossas, para acompanhar a cabeça grande. */}
+        <mesh ref={legLeft} position={[-0.16, 0.22, 0]}>
+          <capsuleGeometry args={[0.11, 0.2, 4, 8]} />
+          <meshLambertMaterial color={PALETTE.boot} />
+        </mesh>
+        <mesh ref={legRight} position={[0.16, 0.22, 0]}>
+          <capsuleGeometry args={[0.11, 0.2, 4, 8]} />
+          <meshLambertMaterial color={PALETTE.boot} />
+        </mesh>
 
-      {/* Cabeça e visor: dão frente ao personagem, para a rotação ser legível. */}
-      <mesh position={[0, PLAYER_HEIGHT + 0.62, 0]}>
-        <sphereGeometry args={[0.28, 16, 12]} />
-        <meshStandardMaterial color="#dfe6ea" roughness={0.5} />
-      </mesh>
-      <mesh position={[0, PLAYER_HEIGHT + 0.62, 0.24]}>
-        <boxGeometry args={[0.3, 0.12, 0.08]} />
-        <meshStandardMaterial color={ACCENT} emissive={ACCENT} emissiveIntensity={0.9} />
+        {/* Túnica: tronco de cone, mais largo embaixo. */}
+        <mesh position={[0, 0.62, 0]} castShadow>
+          <cylinderGeometry args={[0.26, 0.4, 0.62, 12]} />
+          <meshLambertMaterial color={PALETTE.tunic} flatShading />
+        </mesh>
+        <mesh position={[0, 0.34, 0]}>
+          <cylinderGeometry args={[0.41, 0.42, 0.1, 12]} />
+          <meshLambertMaterial color={PALETTE.tunicDark} />
+        </mesh>
+
+        <mesh ref={armLeft} position={[-0.34, 0.74, 0]}>
+          <capsuleGeometry args={[0.085, 0.24, 4, 8]} />
+          <meshLambertMaterial color={PALETTE.tunicDark} />
+        </mesh>
+        <mesh ref={armRight} position={[0.34, 0.74, 0]}>
+          <capsuleGeometry args={[0.085, 0.24, 4, 8]} />
+          <meshLambertMaterial color={PALETTE.tunicDark} />
+        </mesh>
+
+        <group ref={head} position={[0, 1.18, 0]}>
+          <mesh castShadow>
+            <sphereGeometry args={[0.34, 16, 14]} />
+            <meshLambertMaterial color={PALETTE.skin} />
+          </mesh>
+
+          {/* Cabelo como calota, deixando o rosto livre. */}
+          <mesh position={[0, 0.06, -0.04]}>
+            <sphereGeometry args={[0.345, 16, 14, 0, Math.PI * 2, 0, Math.PI / 1.9]} />
+            <meshLambertMaterial color={PALETTE.hair} />
+          </mesh>
+
+          {/* Olhos: é o que dá direção ao personagem quando ele gira. */}
+          <mesh position={[-0.12, -0.02, 0.3]}>
+            <sphereGeometry args={[0.045, 8, 8]} />
+            <meshBasicMaterial color="#2b2b33" />
+          </mesh>
+          <mesh position={[0.12, -0.02, 0.3]}>
+            <sphereGeometry args={[0.045, 8, 8]} />
+            <meshBasicMaterial color="#2b2b33" />
+          </mesh>
+
+          {/* Gorro pontudo, na linha do herói de RPG. */}
+          <mesh position={[0, 0.32, -0.08]} rotation={[-0.38, 0, 0]}>
+            <coneGeometry args={[0.3, 0.66, 12]} />
+            <meshLambertMaterial color={PALETTE.tunic} flatShading />
+          </mesh>
+          <mesh position={[0, 0.14, 0]}>
+            <cylinderGeometry args={[0.35, 0.35, 0.09, 14]} />
+            <meshLambertMaterial color={PALETTE.tunicDark} />
+          </mesh>
+        </group>
+      </group>
+
+      {/* Sombra pintada, presa aos pés. */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.03, 0]}>
+        <circleGeometry args={[0.42, 18]} />
+        <meshBasicMaterial color="#2f5d2a" transparent opacity={0.3} />
       </mesh>
     </group>
   );
+}
+
+type Parts = {
+  body: React.RefObject<Group | null>;
+  head: React.RefObject<Group | null>;
+  legLeft: React.RefObject<Mesh | null>;
+  legRight: React.RefObject<Mesh | null>;
+  armLeft: React.RefObject<Mesh | null>;
+  armRight: React.RefObject<Mesh | null>;
+};
+
+/**
+ * Caminhada e ociosidade.
+ *
+ * Andando: pernas e braços em contrafase, com um salto do corpo a cada passo.
+ * Parado: só a respiração. A troca é por interpolação da amplitude, então não
+ * existe um corte entre os dois estados.
+ */
+function animate(
+  parts: Parts,
+  speed: number,
+  phase: React.RefObject<number>,
+  delta: number,
+  elapsed: number,
+) {
+  const intensity = Math.min(speed / PLAYER_SPEED, 1);
+  phase.current += speed * delta * 2.6;
+
+  const swing = Math.sin(phase.current * 2) * 0.55 * intensity;
+
+  if (parts.legLeft.current) parts.legLeft.current.rotation.x = swing;
+  if (parts.legRight.current) parts.legRight.current.rotation.x = -swing;
+  if (parts.armLeft.current) parts.armLeft.current.rotation.x = -swing * 0.8;
+  if (parts.armRight.current) parts.armRight.current.rotation.x = swing * 0.8;
+
+  if (parts.body.current) {
+    // O salto tem o dobro da frequência do passo: sobe a cada pé que toca o chão.
+    const bounce = Math.abs(Math.sin(phase.current * 2)) * 0.07 * intensity;
+    const breathing = Math.sin(elapsed * 2) * 0.012 * (1 - intensity);
+    parts.body.current.position.y = bounce + breathing;
+    parts.body.current.rotation.z = Math.sin(phase.current * 2) * 0.05 * intensity;
+  }
+
+  if (parts.head.current) {
+    // A cabeça atrasa um pouco em relação ao corpo, o que dá peso ao movimento.
+    parts.head.current.rotation.z = -Math.sin(phase.current * 2 - 0.4) * 0.06 * intensity;
+  }
 }
 
 /**

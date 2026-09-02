@@ -20,11 +20,22 @@ export const SCREEN_FORWARD: [number, number] = [
 
 export const SCREEN_RIGHT: [number, number] = [-SCREEN_FORWARD[1], SCREEN_FORWARD[0]];
 
-/** Distância da câmera ao alvo. Só afeta o clipping — o zoom controla o tamanho. */
-export const CAMERA_DISTANCE = 28;
+/**
+ * Campo de visão, em graus.
+ *
+ * Bem estreito de propósito. Uma lente longa comprime a profundidade e é
+ * justamente isso que faz uma cena parecer uma maquete fotografada de perto —
+ * o mesmo princípio da fotografia tilt-shift. Uma câmera ortográfica pura
+ * daria a leitura de mapa, mas perderia esse efeito e impediria a
+ * profundidade de campo, que aqui é o acabamento principal.
+ */
+export const CAMERA_FOV = 26;
 
-/** Unidades de mundo visíveis na menor dimensão da tela. Menor = mais perto. */
-export const CAMERA_VIEW_SIZE = 22;
+/** Unidades de mundo enquadradas na menor dimensão da tela. Menor = mais perto. */
+export const CAMERA_VIEW_SIZE = 26;
+
+/** Distância mínima, para telas muito largas não deixarem a câmera dentro do chão. */
+export const CAMERA_MIN_DISTANCE = 34;
 
 /** Velocidade máxima do personagem, em unidades por segundo. */
 export const PLAYER_SPEED = 5.6;
