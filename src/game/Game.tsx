@@ -6,6 +6,8 @@ import { useGameStore } from '../store/gameStore';
 import { DioramaCamera } from './DioramaCamera';
 import { LIGHT, PALETTE } from './palette';
 import { Player, type PlayerRef } from './Player';
+import type { InputState } from './input/useInput';
+import { useAutopilot } from './useAutopilot';
 import { useInput } from './input/useInput';
 import { Buildings } from './world/Buildings';
 import { Island } from './world/Island';
@@ -66,10 +68,26 @@ export function Game() {
       </Suspense>
 
       <Player input={input} position={playerPosition} />
+      <Autopilot input={input} position={playerPosition} />
 
       <Effects />
     </Canvas>
   );
+}
+
+/**
+ * O piloto automático é um componente sem saída visual: existe só para rodar
+ * dentro do Canvas, que é onde o loop de animação está disponível.
+ */
+function Autopilot({
+  input,
+  position,
+}: {
+  input: React.RefObject<InputState>;
+  position: React.RefObject<PlayerRef>;
+}) {
+  useAutopilot(position, input);
+  return null;
 }
 
 /**

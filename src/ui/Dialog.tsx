@@ -19,7 +19,14 @@ import avatar from '../assets/profile-primary.jpg';
  */
 export function Dialog() {
   const openDialog = useGameStore((state) => state.openDialog);
-  const close = useGameStore((state) => state.close);
+  const closeDialog = useGameStore((state) => state.close);
+  const takeControl = useGameStore((state) => state.takeControl);
+
+  // Fechar é um comando do visitante: interrompe o passeio automático junto.
+  const close = useCallback(() => {
+    takeControl();
+    closeDialog();
+  }, [takeControl, closeDialog]);
   const locale = useLocale();
 
   const panel = useRef<HTMLDivElement>(null);

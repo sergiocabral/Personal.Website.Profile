@@ -8,6 +8,7 @@ export function InteractPrompt() {
   const activeZone = useGameStore((state) => state.activeZone);
   const openDialog = useGameStore((state) => state.openDialog);
   const open = useGameStore((state) => state.open);
+  const takeControl = useGameStore((state) => state.takeControl);
   const touch = useGameStore((state) => state.touch);
   const locale = useLocale();
 
@@ -17,7 +18,14 @@ export function InteractPrompt() {
   if (!section) return null;
 
   return (
-    <button type="button" className="prompt frame" onClick={() => open(activeZone)}>
+    <button
+      type="button"
+      className="prompt frame"
+      onClick={() => {
+        takeControl();
+        open(activeZone);
+      }}
+    >
       <span className="prompt__key" aria-hidden="true">
         {touch ? '☝' : 'E'}
       </span>

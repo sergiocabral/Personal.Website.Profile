@@ -12,6 +12,14 @@ export const UI = {
   interactKey: { 'pt-BR': 'Pressione E para conversar', en: 'Press E to talk' },
   interactTouch: { 'pt-BR': 'Toque para conversar', en: 'Tap to talk' },
   close: { 'pt-BR': 'Fechar', en: 'Close' },
+  autoPlaying: {
+    'pt-BR': 'Passeando sozinho — use WASD ou as setas para assumir',
+    en: 'Touring on its own — use WASD or the arrow keys to take over',
+  },
+  autoPlayingTouch: {
+    'pt-BR': 'Passeando sozinho — arraste o controle para assumir',
+    en: 'Touring on its own — drag the stick to take over',
+  },
   moveHint: {
     'pt-BR': 'Use WASD ou as setas para andar',
     en: 'Use WASD or the arrow keys to walk',

@@ -10,6 +10,7 @@ export function Hud() {
   const setLocale = useGameStore((state) => state.setLocale);
   const visited = useGameStore((state) => state.visited);
   const touch = useGameStore((state) => state.touch);
+  const auto = useGameStore((state) => state.auto);
   const dialogOpen = useGameStore((state) => state.openDialog) !== null;
 
   return (
@@ -57,7 +58,11 @@ export function Hud() {
         </div>
 
         {dialogOpen ? null : (
-          <p className="hud__hint frame">{t(touch ? 'moveHintTouch' : 'moveHint', locale)}</p>
+          <p className={`hud__hint frame${auto ? ' hud__hint--auto' : ''}`}>
+            {auto
+              ? t(touch ? 'autoPlayingTouch' : 'autoPlaying', locale)
+              : t(touch ? 'moveHintTouch' : 'moveHint', locale)}
+          </p>
         )}
 
         <span style={{ width: '4rem' }} />

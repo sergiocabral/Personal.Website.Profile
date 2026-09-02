@@ -701,3 +701,8 @@ button {
   margin: 0;
   line-height: 1.7;
 }
+
+/* O aviso de passeio automático se distingue por cor, não por movimento. */
+.hud__hint--auto {
+  color: var(--brand);
+}
