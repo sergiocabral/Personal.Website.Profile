@@ -531,6 +531,18 @@ button {
   grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr));
 }
 
+.links__item {
+  display: flex;
+}
+
+/*
+ * Todos os cartões têm a mesma altura.
+ *
+ * As linhas da grade já se igualam pelo item mais alto; o `height: 100%` faz o
+ * link preencher a célula, senão um cartão sem descrição ficaria mais baixo que
+ * o vizinho e a lista viraria um serrilhado. Todo link tem descrição no
+ * conteúdo, mas o layout não deve depender disso.
+ */
 .links__item a {
   display: flex;
   align-items: center;
@@ -705,4 +717,82 @@ button {
 /* O aviso de passeio automático se distingue por cor, não por movimento. */
 .hud__hint--auto {
   color: var(--brand);
+}
+
+/* -------------------------------------------------------- botão de jogar -- */
+
+/*
+ * O convite para o mundo 3D.
+ *
+ * Chama atenção por contraste de cor e tamanho, não por animação: a página é
+ * onde o visitante lê os contatos, e algo piscando ao lado disso atrapalha.
+ */
+.play {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 2rem;
+  padding: 1rem 1.2rem;
+  background: var(--brand);
+  color: var(--box);
+  border: 3px solid var(--frame);
+  border-radius: 8px;
+  box-shadow: 0 6px 0 var(--frame-shadow);
+  text-decoration: none;
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+}
+
+.play:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 var(--frame-shadow);
+}
+
+.play:active {
+  transform: translateY(6px);
+  box-shadow: 0 0 0 var(--frame-shadow);
+}
+
+.play__badge {
+  display: grid;
+  place-content: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  flex-shrink: 0;
+  background: var(--box);
+  color: var(--brand);
+  border-radius: 6px;
+  font-size: 1.1rem;
+  padding-left: 0.15rem;
+}
+
+.play__text {
+  display: grid;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.play__text strong {
+  font-family: var(--font-pixel);
+  font-size: clamp(0.75rem, 3vw, 1rem);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.play__text span {
+  font-size: 0.88rem;
+  opacity: 0.8;
+}
+
+/* ------------------------------------------------------- cabeçalho info -- */
+
+.info__identity {
+  min-width: 0;
+}
+
+.info__lang {
+  display: flex;
+  gap: 0.4rem;
+  margin-inline-start: auto;
 }

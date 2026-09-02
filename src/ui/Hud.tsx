@@ -41,7 +41,7 @@ export function Hud() {
             EN
           </button>
           {/* Link real, não botão: o crawler precisa atravessar até o conteúdo. */}
-          <Link className="hud__button" to="/info">
+          <Link className="hud__button" to="/">
             {t('skipGame', locale)}
           </Link>
         </div>

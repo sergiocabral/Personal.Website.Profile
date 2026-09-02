@@ -40,7 +40,7 @@ export class SceneBoundary extends Component<Props, State> {
         <div className="notfound__panel frame">
           <h1>{content.profile.name}</h1>
           <p>{t('sceneFailed', locale)}</p>
-          <Link className="info__cta" to="/info">
+          <Link className="info__cta" to="/">
             {t('skipGame', locale)}
           </Link>
         </div>

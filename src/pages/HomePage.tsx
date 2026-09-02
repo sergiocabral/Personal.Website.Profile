@@ -12,12 +12,15 @@ import { Seo } from '../ui/Seo';
 import avatar from '../assets/profile-primary.jpg';
 
 /**
- * Versão em texto do site: o mesmo conteúdo do mundo 3D, em HTML semântico.
+ * A página inicial: todo o conteúdo em HTML semântico.
  *
- * É pré-renderizada em `dist/info/index.html`, então é o que os buscadores e os
- * leitores de tela consomem — o mundo 3D nunca é pré-requisito para ler nada.
+ * É a raiz do site, e não o jogo, porque é isto que a maioria dos visitantes
+ * veio buscar — um contato, um link, saber quem é a pessoa. É também o que os
+ * buscadores indexam e o que um leitor de tela percorre, sem depender de WebGL.
+ *
+ * O mundo 3D fica a um clique, em destaque, para quem tiver vontade.
  */
-export function InfoPage() {
+export function HomePage() {
   const locale = useLocale();
   const setLocale = useGameStore((state) => state.setLocale);
   const { profile } = content;
@@ -27,17 +30,17 @@ export function InfoPage() {
       <Seo
         title={pick(profile.seo.title, locale)}
         description={pick(profile.seo.description, locale)}
-        path="/info/"
+        path="/"
       />
 
       <div className="info__inner frame">
         <header className="info__header">
           <img className="info__avatar" src={avatar} alt="" width={88} height={88} />
-          <div>
+          <div className="info__identity">
             <h1>{profile.name}</h1>
             <p>{pick(profile.role, locale)}</p>
           </div>
-          <div className="hud__controls" style={{ marginInlineStart: 'auto' }}>
+          <div className="info__lang">
             <button
               type="button"
               className="hud__button"
@@ -56,6 +59,18 @@ export function InfoPage() {
             </button>
           </div>
         </header>
+
+        {/* Convite para o jogo, logo abaixo da identidade: quem quiser explorar
+            encontra sem procurar, e quem só quer os links segue rolando. */}
+        <RouterLink className="play" to="/game">
+          <span className="play__badge" aria-hidden="true">
+            ▶
+          </span>
+          <span className="play__text">
+            <strong>{t('play', locale)}</strong>
+            <span>{t('playSubtitle', locale)}</span>
+          </span>
+        </RouterLink>
 
         {content.sections.map((section) => {
           const icon = getIcon(section.iconStyle, section.icon);
@@ -78,8 +93,8 @@ export function InfoPage() {
 
         <footer className="info__footer">
           <span>{pick(profile.seo.description, locale)}</span>
-          <RouterLink className="info__cta" to="/">
-            {t('backToGame', locale)}
+          <RouterLink className="info__cta" to="/game">
+            {t('play', locale)}
           </RouterLink>
         </footer>
       </div>

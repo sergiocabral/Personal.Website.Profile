@@ -4,7 +4,7 @@ import { getIcon } from './icons';
 import { pick } from '../i18n/locale';
 
 /**
- * Lista de links compartilhada entre o diálogo do jogo e a página /info.
+ * Lista de links compartilhada entre o diálogo do jogo e a página inicial.
  * Manter uma implementação só garante que as duas versões nunca divirjam.
  */
 export function LinkList({ links, locale }: { links: Link[]; locale: Locale }) {

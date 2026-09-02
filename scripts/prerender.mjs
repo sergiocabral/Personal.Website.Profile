@@ -1,14 +1,14 @@
 /**
  * Pré-renderização estática, executada depois do `vite build`.
  *
- * O objetivo é que um crawler ou um leitor de tela nunca receba um `<div id="root">`
- * vazio: `/` sai com o cabeçalho e o link para o conteúdo, e `/info/` sai com os
- * 21 links em HTML de verdade.
+ * A raiz sai com todo o conteúdo em HTML — os 21 links, a bio, o JSON-LD — e
+ * `/game/` sai com a casca do mundo 3D. Assim nenhum visitante, nem o Googlebot,
+ * recebe um `<div id="root">` vazio, e o conteúdo nunca depende de WebGL.
  *
- * A abordagem é deliberadamente simples — montar as strings a partir do mesmo
- * `content.json` que a aplicação usa, sem renderizar React em Node. Renderizar a
- * árvore exigiria um segundo build SSR e traria o risco de alguém importar a
- * cena 3D por engano, e `@react-three/fiber` toca `window` já no import.
+ * A abordagem é deliberadamente simples: montar as strings a partir do mesmo
+ * `content.json` que a aplicação usa, sem renderizar React em Node. Um segundo
+ * build SSR traria o risco de alguém importar a cena 3D por engano, e
+ * `@react-three/fiber` toca `window` já no import.
  */
 
 import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -24,6 +24,9 @@ const template = readFileSync(resolve(dist, 'index.html'), 'utf8');
 
 const { profile } = content;
 
+/** Idioma do HTML gerado. O seletor da página troca em tempo de execução. */
+const LOCALE = 'pt-BR';
+
 const escape = (value) =>
   String(value)
     .replace(/&/g, '&amp;')
@@ -34,7 +37,7 @@ const escape = (value) =>
 /** Mesmo cálculo de `src/data/derive.ts`, para o HTML estático não divergir da app. */
 function age(birthDate, today = new Date()) {
   const born = new Date(birthDate);
-  let years = today.getFullYear() - born.getFullYear();
+  const years = today.getFullYear() - born.getFullYear();
   const hadBirthday =
     today.getMonth() > born.getMonth() ||
     (today.getMonth() === born.getMonth() && today.getDate() >= born.getDate());
@@ -71,7 +74,7 @@ function head({ title, description, path }) {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: profile.name,
-    jobTitle: profile.role['pt-BR'],
+    jobTitle: profile.role[LOCALE],
     url: profile.url,
     image: ogImage,
     sameAs,
@@ -104,7 +107,7 @@ function linkList(links) {
       const external = !link.url.startsWith('mailto:');
       const rel = external ? ' target="_blank" rel="noopener noreferrer"' : '';
       const description = link.description
-        ? `<span class="links__desc">${escape(link.description['pt-BR'])}</span>`
+        ? `<span class="links__desc">${escape(link.description[LOCALE])}</span>`
         : '';
 
       return `<li class="links__item"><a href="${escape(link.url)}"${rel}><span class="links__text"><span class="links__name">${escape(link.name)}</span>${description}</span></a></li>`;
@@ -114,15 +117,16 @@ function linkList(links) {
   return `<ul class="links">\n${items}\n</ul>`;
 }
 
-function infoBody() {
+/** A raiz: identidade, convite para o jogo e todo o conteúdo. */
+function homeBody() {
   const sections = content.sections
     .map((section) => {
       const body = section.dialog.body
-        ? `<div class="dialog__prose">${markdown(interpolate(section.dialog.body['pt-BR']))}</div>`
+        ? `<div class="dialog__prose">${markdown(interpolate(section.dialog.body[LOCALE]))}</div>`
         : '';
 
       return `<section class="info__section">
-  <h2>${escape(section.label['pt-BR'])}</h2>
+  <h2>${escape(section.label[LOCALE])}</h2>
   ${body}
   ${linkList(section.links)}
 </section>`;
@@ -131,29 +135,33 @@ function infoBody() {
 
   return `<main class="info"><div class="info__inner frame">
   <header class="info__header">
-    <div>
+    <div class="info__identity">
       <h1>${escape(profile.name)}</h1>
-      <p>${escape(profile.role['pt-BR'])}</p>
+      <p>${escape(profile.role[LOCALE])}</p>
     </div>
   </header>
+  <a class="play" href="/game">
+    <span class="play__badge" aria-hidden="true">&#9654;</span>
+    <span class="play__text"><strong>Jogar</strong><span>Explore tudo isto num mundo 3D</span></span>
+  </a>
   ${sections}
   <footer class="info__footer">
-    <span>${escape(profile.seo.description['pt-BR'])}</span>
-    <a class="info__cta" href="/">Voltar para o jogo</a>
+    <span>${escape(profile.seo.description[LOCALE])}</span>
+    <a class="info__cta" href="/game">Jogar</a>
   </footer>
 </div></main>`;
 }
 
 /**
- * Casca da home. O React substitui isto assim que hidrata; até lá, o crawler já
- * tem o nome, o cargo e — o que mais importa — o link para a página completa.
+ * Casca do jogo. O React a substitui assim que hidrata; até lá, quem chegar já
+ * tem o nome e — o que mais importa — o link para a página com o conteúdo.
  */
 function gameBody() {
   return `<div class="game"><div class="loading">
-  <h1 class="visually-hidden">${escape(profile.name)} — ${escape(profile.role['pt-BR'])}</h1>
+  <h1 class="visually-hidden">${escape(profile.name)} — ${escape(profile.role[LOCALE])}</h1>
   <span class="loading__label">Carregando o mundo…</span>
   <div class="loading__bar"><div class="loading__fill"></div></div>
-  <noscript><a href="/info/">Ver todo o conteúdo em texto</a></noscript>
+  <noscript><a href="/">Ver todo o conteúdo em texto</a></noscript>
 </div></div>`;
 }
 
@@ -170,25 +178,33 @@ function write(path, { title, description, canonicalPath, body }) {
 console.log('pré-renderizando:');
 
 write(resolve(dist, 'index.html'), {
-  title: profile.seo.title['pt-BR'],
-  description: profile.seo.description['pt-BR'],
+  title: profile.seo.title[LOCALE],
+  description: profile.seo.description[LOCALE],
   canonicalPath: '/',
+  body: homeBody(),
+});
+
+write(resolve(dist, 'game/index.html'), {
+  title: `${profile.seo.title[LOCALE]} — Mundo 3D`,
+  description: profile.seo.description[LOCALE],
+  canonicalPath: '/game/',
   body: gameBody(),
 });
 
+// A rota antiga continua respondendo: pode haver links para ela por aí.
 write(resolve(dist, 'info/index.html'), {
-  title: `${profile.seo.title['pt-BR']} — Todas as informações`,
-  description: profile.seo.description['pt-BR'],
-  canonicalPath: '/info/',
-  body: infoBody(),
+  title: profile.seo.title[LOCALE],
+  description: profile.seo.description[LOCALE],
+  canonicalPath: '/',
+  body: homeBody(),
 });
 
-// O Pages serve 404.html para qualquer caminho desconhecido. Servindo o /info ali,
-// uma URL errada ainda entrega o conteúdo em vez de uma página vazia.
-copyFileSync(resolve(dist, 'info/index.html'), resolve(dist, '404.html'));
+// O Pages serve 404.html para qualquer caminho desconhecido. Servindo a raiz
+// ali, uma URL errada ainda entrega o conteúdo em vez de uma página vazia.
+copyFileSync(resolve(dist, 'index.html'), resolve(dist, '404.html'));
 console.log('  ./dist/404.html');
 
-const urls = ['/', '/info/']
+const urls = ['/', '/game/']
   .map(
     (path) =>
       `  <url><loc>${new URL(path, profile.url).toString()}</loc><changefreq>monthly</changefreq></url>`,

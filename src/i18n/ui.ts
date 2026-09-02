@@ -6,8 +6,12 @@ import type { Locale } from '../data/schema';
  */
 export const UI = {
   loading: { 'pt-BR': 'Carregando o mundo…', en: 'Loading the world…' },
-  enterWorld: { 'pt-BR': 'Entrar no mundo', en: 'Enter the world' },
-  skipGame: { 'pt-BR': 'Pular o jogo', en: 'Skip the game' },
+  play: { 'pt-BR': 'Jogar', en: 'Play' },
+  playSubtitle: {
+    'pt-BR': 'Explore tudo isto num mundo 3D',
+    en: 'Explore all of this in a 3D world',
+  },
+  skipGame: { 'pt-BR': 'Ver em texto', en: 'Text version' },
   backToGame: { 'pt-BR': 'Voltar para o jogo', en: 'Back to the game' },
   interactKey: { 'pt-BR': 'Pressione E para conversar', en: 'Press E to talk' },
   interactTouch: { 'pt-BR': 'Toque para conversar', en: 'Tap to talk' },
