@@ -2,7 +2,7 @@ import { faHandHoldingHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link as RouterLink } from 'react-router';
 import { content } from '../data';
-import { text } from '../data/derive';
+import { donateUrl, text } from '../data/derive';
 import type { Locale } from '../data/schema';
 import { pick } from '../i18n/locale';
 import { t } from '../i18n/ui';
@@ -120,7 +120,12 @@ function Donate({ locale }: { locale: Locale }) {
   const card = getIcon('solid', 'credit-card');
 
   return (
-    <a className="donate" href={donate.url} target="_blank" rel="noopener noreferrer">
+    <a
+      className="donate"
+      href={donateUrl(donate.url, locale)}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <span className="donate__icon" aria-hidden="true">
         <FontAwesomeIcon icon={faHandHoldingHeart} />
       </span>

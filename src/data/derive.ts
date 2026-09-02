@@ -43,3 +43,15 @@ export function interpolate(text: string): string {
 export function text(value: Localized, locale: Locale): string {
   return interpolate(pick(value, locale));
 }
+
+/**
+ * URL de doação com o idioma atual no caminho.
+ *
+ * O site donate.cabral.dev serve versões por idioma em /pt e /en. Mandar a
+ * pessoa direto para a sua língua evita um passo — e evita que ela caia no
+ * idioma errado e ache que o site não é dela.
+ */
+export function donateUrl(baseUrl: string, locale: Locale): string {
+  const suffix = locale === 'pt-BR' ? 'pt' : 'en';
+  return new URL(suffix, baseUrl).toString();
+}
