@@ -249,11 +249,11 @@
         {
           "name": "I Don't Need It",
           "url": "https://idontneedit.org/",
-          "icon": "money-bill",
+          "icon": "hand-holding-heart",
           "iconStyle": "solid",
           "description": {
-            "pt-BR": "Uma pausa antes da compra por impulso",
-            "en": "A pause before the impulse buy"
+            "pt-BR": "Gostou do meu trabalho? Me pague um café",
+            "en": "Like my work? Buy me a coffee"
           }
         },
         {
