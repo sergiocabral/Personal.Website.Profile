@@ -20,7 +20,22 @@
       "ogImage": "/opengraph.jpg"
     },
     "codingSince": 2001,
-    "teachingSince": 2021
+    "teachingSince": 2021,
+    "donate": {
+      "url": "https://donate.cabral.dev/",
+      "title": {
+        "pt-BR": "Apoie meu trabalho",
+        "en": "Support my work"
+      },
+      "subtitle": {
+        "pt-BR": "Se algo aqui te ajudou, me pague um café",
+        "en": "If something here helped you, buy me a coffee"
+      },
+      "methods": {
+        "pt-BR": "Pix e cartão",
+        "en": "Pix and card"
+      }
+    }
   },
   "theme": {
     "browserColor": "#FFD602",
@@ -244,16 +259,6 @@
           "description": {
             "pt-BR": "Traduções organizadas para comparar",
             "en": "Translations organised for comparison"
-          }
-        },
-        {
-          "name": "I Don't Need It",
-          "url": "https://idontneedit.org/",
-          "icon": "hand-holding-heart",
-          "iconStyle": "solid",
-          "description": {
-            "pt-BR": "Gostou do meu trabalho? Me pague um café",
-            "en": "Like my work? Buy me a coffee"
           }
         },
         {

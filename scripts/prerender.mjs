@@ -178,6 +178,11 @@ function homeBody() {
     <span class="play__badge" aria-hidden="true">&#9654;</span>
     <span class="play__text"><strong>Jogar</strong><span>Explore tudo isto num mundo 3D</span></span>
   </a>
+  <a class="donate" href="${escape(profile.donate.url)}" target="_blank" rel="noopener noreferrer">
+    <span class="donate__icon" aria-hidden="true">&#10084;</span>
+    <span class="donate__text"><strong>${escape(profile.donate.title[LOCALE])}</strong><span>${escape(profile.donate.subtitle[LOCALE])}</span></span>
+    <span class="donate__methods"><span class="donate__method">Pix</span><span class="donate__method">Cartão</span></span>
+  </a>
   ${sections}
   <footer class="info__footer">
     <span>${escape(profile.seo.description[LOCALE])}</span>

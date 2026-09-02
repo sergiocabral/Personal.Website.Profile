@@ -60,6 +60,14 @@ export type ContentData = {
       description: Localized;
       ogImage: string;
     };
+    /** Destaque de apoio financeiro, exibido em evidência na página inicial. */
+    donate: {
+      url: string;
+      title: Localized;
+      subtitle: Localized;
+      /** Formas de pagamento aceitas, mostradas como selos. */
+      methods: Localized;
+    };
   };
   theme: {
     /** Cor da barra do navegador (meta theme-color). */

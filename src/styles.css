@@ -872,3 +872,99 @@ button {
     animation: avatar-swap 90s ease-in-out infinite;
   }
 }
+
+/* -------------------------------------------------------- doação --------- */
+
+/*
+ * Destaque de apoio, irmão do botão de jogar.
+ *
+ * Usa a cor de acento, e não o amarelo do jogo, para haver hierarquia: jogar é
+ * a ação principal, apoiar é um convite ao lado. Os selos de forma de pagamento
+ * respondem de imediato ao "como eu pago?", que costuma travar quem quer
+ * contribuir.
+ */
+.donate {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 2rem;
+  padding: 0.9rem 1.1rem;
+  background: rgba(26, 241, 242, 0.08);
+  color: var(--text);
+  border: 3px solid var(--accent);
+  border-radius: 8px;
+  text-decoration: none;
+  transition:
+    transform 0.1s ease,
+    background 0.12s ease;
+}
+
+.donate:hover {
+  transform: translateY(-2px);
+  background: rgba(26, 241, 242, 0.14);
+}
+
+.donate__icon {
+  display: grid;
+  place-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  flex-shrink: 0;
+  background: var(--accent);
+  color: var(--box);
+  border-radius: 6px;
+  font-size: 1.15rem;
+}
+
+.donate__text {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.donate__text strong {
+  font-family: var(--font-pixel);
+  font-size: clamp(0.62rem, 2.4vw, 0.8rem);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--accent);
+}
+
+.donate__text span {
+  font-size: 0.86rem;
+  color: var(--text-dim);
+}
+
+.donate__methods {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.donate__method {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.55rem;
+  background: var(--box);
+  border: 2px solid var(--frame-shadow);
+  border-radius: 5px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Numa tela estreita os selos passam para baixo do texto, sem espremer. */
+@media (max-width: 30rem) {
+  .donate {
+    flex-wrap: wrap;
+  }
+
+  .donate__methods {
+    width: 100%;
+    justify-content: flex-start;
+    padding-left: 3.6rem;
+  }
+}
