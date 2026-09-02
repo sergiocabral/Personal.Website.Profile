@@ -1,7 +1,7 @@
 {
   "profile": {
     "name": "Sergio Cabral",
-    "birthDate": "1982-07-01",
+    "birthYear": 1982,
     "role": {
       "pt-BR": "Desenvolvedor",
       "en": "Developer"
@@ -18,6 +18,23 @@
         "en": "Senior full stack developer. Explore the map to find my contacts, social networks and projects."
       },
       "ogImage": "/opengraph.jpg"
+    },
+    "codingSince": 2001,
+    "teachingSince": 2021,
+    "donate": {
+      "url": "https://donate.cabral.dev/",
+      "title": {
+        "pt-BR": "Apoie meu trabalho",
+        "en": "Support my work"
+      },
+      "subtitle": {
+        "pt-BR": "Se algo aqui te ajudou, me pague um café",
+        "en": "If something here helped you, buy me a coffee"
+      },
+      "methods": {
+        "pt-BR": "Pix e cartão",
+        "en": "Pix and card"
+      }
     }
   },
   "theme": {
@@ -89,16 +106,6 @@
             "pt-BR": "Convite para o servidor",
             "en": "Invite to the server"
           }
-        },
-        {
-          "name": "Guilded",
-          "url": "https://www.guilded.gg/i/VkX8nblk",
-          "icon": "guilded",
-          "iconStyle": "brands",
-          "description": {
-            "pt-BR": "Convite para o servidor",
-            "en": "Invite to the server"
-          }
         }
       ]
     },
@@ -153,18 +160,18 @@
           "icon": "twitch",
           "iconStyle": "brands",
           "description": {
-            "pt-BR": "Live coding de segunda a sexta",
-            "en": "Live coding Monday to Friday"
+            "pt-BR": "Onde as lives aconteciam",
+            "en": "Where the streams used to happen"
           }
         },
         {
-          "name": "YouTube",
+          "name": "YouTube · devnator",
           "url": "https://www.youtube.com/channel/UCBBmSw69UpBbncKM2Xbw-hQ/videos",
           "icon": "youtube",
           "iconStyle": "brands",
           "description": {
-            "pt-BR": "Canal de vídeos",
-            "en": "Video channel"
+            "pt-BR": "Acervo das lives de programação",
+            "en": "Archive of the coding streams"
           }
         },
         {
@@ -225,33 +232,33 @@
       },
       "links": [
         {
-          "name": "I Don't Need It",
-          "url": "https://idontneedit.org/",
-          "icon": "money-bill",
+          "name": "Raciocínios",
+          "url": "https://www.raciocinios.com.br/",
+          "icon": "lightbulb",
           "iconStyle": "solid",
           "description": {
-            "pt-BR": "Pense antes de comprar",
-            "en": "Think before you buy"
+            "pt-BR": "Biblioteca de leitura, pesquisa e anotações",
+            "en": "A library for reading, research and notes"
           }
         },
         {
-          "name": "E-Books",
-          "url": "https://ebooks.sergiocabral.com/",
-          "icon": "book",
+          "name": "Raciocínios · Livros",
+          "url": "https://books.raciocinios.com.br/",
+          "icon": "book-open",
           "iconStyle": "solid",
           "description": {
-            "pt-BR": "Coleção de e-books",
-            "en": "E-book collection"
+            "pt-BR": "O acervo de livros da biblioteca",
+            "en": "The library book collection"
           }
         },
         {
-          "name": "Fotografias",
-          "url": "https://fotos.sergiocabral.com/",
-          "icon": "camera-retro",
+          "name": "Raciocínios · Bíblias",
+          "url": "https://bible.raciocinios.com.br/",
+          "icon": "book-bible",
           "iconStyle": "solid",
           "description": {
-            "pt-BR": "Fotos que eu tirei",
-            "en": "Photos I have taken"
+            "pt-BR": "Traduções organizadas para comparar",
+            "en": "Translations organised for comparison"
           }
         },
         {
@@ -260,28 +267,48 @@
           "icon": "git-alt",
           "iconStyle": "brands",
           "description": {
-            "pt-BR": "Aprenda Git na prática",
-            "en": "Learn Git hands-on"
+            "pt-BR": "Visualize o que cada comando do Git faz",
+            "en": "See what each Git command actually does"
           }
         },
         {
-          "name": "Loto Number",
-          "url": "https://sorteios.sergiocabral.com/",
+          "name": "Luckygames",
+          "url": "https://luckygames.tips/",
           "icon": "sort-numeric-down",
           "iconStyle": "solid",
           "description": {
-            "pt-BR": "Sorteio de números",
-            "en": "Random number draws"
+            "pt-BR": "Resultados e palpites de loterias",
+            "en": "Lottery results and picks"
           }
         },
         {
-          "name": "Read Quickly",
-          "url": "https://quickly.sergiocabral.com/",
-          "icon": "glasses",
+          "name": "E-Books",
+          "url": "https://ebooks.sergiocabral.com/",
+          "icon": "book",
           "iconStyle": "solid",
           "description": {
-            "pt-BR": "Leitura dinâmica no navegador",
-            "en": "Speed reading in the browser"
+            "pt-BR": "Meus livros, de graça",
+            "en": "My books, free to read"
+          }
+        },
+        {
+          "name": "Fotografias",
+          "url": "https://fotos.sergiocabral.com/",
+          "icon": "camera-retro",
+          "iconStyle": "solid",
+          "description": {
+            "pt-BR": "Ensaios e registros que eu fiz",
+            "en": "Photo essays and shots of mine"
+          }
+        },
+        {
+          "name": "Repositórios",
+          "url": "https://github.com/sergiocabral?tab=repositories",
+          "icon": "github",
+          "iconStyle": "brands",
+          "description": {
+            "pt-BR": "Mais de 100 projetos abertos no GitHub",
+            "en": "Over 100 open projects on GitHub"
           }
         }
       ]
@@ -300,8 +327,8 @@
           "en": "Ah, you found the sign. Let me introduce myself properly."
         },
         "body": {
-          "pt-BR": "🍕 Não me lembro bem quando comecei a me aventurar com códigos e programação, 👶 talvez nos meus 13 anos. Mas hoje tenho {age}? 👨‍🦳\n\n🏁 Hoje em dia trabalho como **desenvolvedor sênior full stack** 😎 lidando com C#, SQL, JavaScript e TypeScript.\n\n👽 Mas você me encontra **de segunda a sexta na Twitch** 📺, quando faço live coding com um assunto pra cada dia.",
-          "en": "🍕 I don't quite remember when I started tinkering with code, 👶 maybe around the age of 13. And today I'm {age}? 👨‍🦳\n\n🏁 These days I work as a **senior full stack developer** 😎 dealing with C#, SQL, JavaScript and TypeScript.\n\n👽 But you can find me **on Twitch from Monday to Friday** 📺, doing live coding with a different topic each day."
+          "pt-BR": "🍕 Programo há {codingYears} anos, desde a época em que descobrir como uma coisa funcionava era mais divertido que o resultado. Hoje tenho {age}.\n\n🏁 Trabalho como **desenvolvedor sênior full stack**, principalmente com C#, SQL, JavaScript e TypeScript — e nos últimos {teachingYears} anos também **ensino tecnologia**.\n\n📺 Sob o nome **devnator**, fiz live coding por um bom tempo. As lives não acontecem mais, mas o acervo continua no YouTube.",
+          "en": "🍕 I have been programming for {codingYears} years, since back when figuring out how something worked was more fun than the result. Today I'm {age}.\n\n🏁 I work as a **senior full stack developer**, mostly with C#, SQL, JavaScript and TypeScript — and for the last {teachingYears} years I also **teach technology**.\n\n📺 Under the name **devnator**, I did live coding for a good while. The streams are over, but the archive is still on YouTube."
         }
       },
       "links": []

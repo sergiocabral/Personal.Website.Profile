@@ -21,7 +21,7 @@ const content = read('content.json');
 const world = read('world.json');
 
 const LOCALES = ['pt-BR', 'en'];
-const ALLOWED_TOKENS = new Set(['age']);
+const ALLOWED_TOKENS = new Set(['age', 'codingYears', 'teachingYears']);
 
 const errors = [];
 const warnings = [];
@@ -60,8 +60,8 @@ if (!profile.url.startsWith('https://')) fail('profile.url precisa ser https');
 if (profile.url.includes('sergiocabral.com')) {
   fail('profile.url ainda aponta para o domínio antigo .com');
 }
-if (Number.isNaN(Date.parse(profile.birthDate))) {
-  fail(`profile.birthDate inválido: ${profile.birthDate}`);
+if (!Number.isInteger(profile.birthYear) || profile.birthYear < 1900) {
+  fail(`profile.birthYear inválido: ${profile.birthYear}`);
 }
 
 checkLocalized(profile.role, 'profile.role');

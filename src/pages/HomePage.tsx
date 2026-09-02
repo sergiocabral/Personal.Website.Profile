@@ -1,7 +1,9 @@
+import { faHandHoldingHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link as RouterLink } from 'react-router';
 import { content } from '../data';
-import { text } from '../data/derive';
+import { donateUrl, text } from '../data/derive';
+import type { Locale } from '../data/schema';
 import { pick } from '../i18n/locale';
 import { t } from '../i18n/ui';
 import { useGameStore, useLocale } from '../store/gameStore';
@@ -72,6 +74,8 @@ export function HomePage() {
           </span>
         </RouterLink>
 
+        <Donate locale={locale} />
+
         {content.sections.map((section) => {
           const icon = getIcon(section.iconStyle, section.icon);
 
@@ -99,5 +103,48 @@ export function HomePage() {
         </footer>
       </div>
     </main>
+  );
+}
+
+/**
+ * Destaque de apoio financeiro.
+ *
+ * Fica ao lado do convite para o jogo, com estilo próprio para não competir com
+ * ele: o jogo é a ação principal, a doação é um convite. Os selos de Pix e
+ * cartão respondem de imediato à pergunta "como eu pago?", que é o que costuma
+ * travar quem quer contribuir.
+ */
+function Donate({ locale }: { locale: Locale }) {
+  const { donate } = content.profile;
+  const pix = getIcon('brands', 'pix');
+  const card = getIcon('solid', 'credit-card');
+
+  return (
+    <a
+      className="donate"
+      href={donateUrl(donate.url, locale)}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span className="donate__icon" aria-hidden="true">
+        <FontAwesomeIcon icon={faHandHoldingHeart} />
+      </span>
+      <span className="donate__text">
+        <strong>{pick(donate.title, locale)}</strong>
+        <span>{pick(donate.subtitle, locale)}</span>
+      </span>
+      <span className="donate__methods" aria-label={pick(donate.methods, locale)}>
+        {pix ? (
+          <span className="donate__method">
+            <FontAwesomeIcon icon={pix} aria-hidden="true" /> Pix
+          </span>
+        ) : null}
+        {card ? (
+          <span className="donate__method">
+            <FontAwesomeIcon icon={card} aria-hidden="true" />
+          </span>
+        ) : null}
+      </span>
+    </a>
   );
 }
