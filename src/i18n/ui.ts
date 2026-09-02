@@ -22,6 +22,10 @@ export const UI = {
   },
   language: { 'pt-BR': 'Idioma', en: 'Language' },
   openLink: { 'pt-BR': 'abrir em nova aba', en: 'open in a new tab' },
+  sceneFailed: {
+    'pt-BR': 'O mundo 3D não conseguiu carregar. Todo o conteúdo está na versão em texto.',
+    en: 'The 3D world failed to load. All the content is in the text version.',
+  },
   noWebgl: {
     'pt-BR': 'Seu navegador não conseguiu iniciar o 3D. Veja a versão em texto.',
     en: 'Your browser could not start 3D. Here is the text version.',

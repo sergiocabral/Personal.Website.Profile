@@ -9,6 +9,7 @@ import { Dialog } from '../ui/Dialog';
 import { Hud } from '../ui/Hud';
 import { InteractPrompt } from '../ui/InteractPrompt';
 import { Joystick } from '../ui/Joystick';
+import { SceneBoundary } from '../ui/SceneBoundary';
 import { Seo } from '../ui/Seo';
 
 /**
@@ -79,9 +80,11 @@ export function GamePage() {
         </div>
       ) : (
         <>
-          <Suspense fallback={<Loading locale={locale} />}>
-            <Game />
-          </Suspense>
+          <SceneBoundary locale={locale}>
+            <Suspense fallback={<Loading locale={locale} />}>
+              <Game />
+            </Suspense>
+          </SceneBoundary>
 
           <Hud />
           <InteractPrompt />
