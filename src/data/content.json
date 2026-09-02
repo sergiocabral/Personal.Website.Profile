@@ -91,16 +91,6 @@
             "pt-BR": "Convite para o servidor",
             "en": "Invite to the server"
           }
-        },
-        {
-          "name": "Guilded",
-          "url": "https://www.guilded.gg/i/VkX8nblk",
-          "icon": "guilded",
-          "iconStyle": "brands",
-          "description": {
-            "pt-BR": "Convite para o servidor",
-            "en": "Invite to the server"
-          }
         }
       ]
     },
@@ -227,33 +217,43 @@
       },
       "links": [
         {
+          "name": "Raciocínios",
+          "url": "https://www.raciocinios.com.br/",
+          "icon": "lightbulb",
+          "iconStyle": "solid",
+          "description": {
+            "pt-BR": "Biblioteca de leitura, pesquisa e anotações",
+            "en": "A library for reading, research and notes"
+          }
+        },
+        {
+          "name": "Raciocínios · Livros",
+          "url": "https://books.raciocinios.com.br/",
+          "icon": "book-open",
+          "iconStyle": "solid",
+          "description": {
+            "pt-BR": "O acervo de livros da biblioteca",
+            "en": "The library book collection"
+          }
+        },
+        {
+          "name": "Raciocínios · Bíblias",
+          "url": "https://bible.raciocinios.com.br/",
+          "icon": "book-bible",
+          "iconStyle": "solid",
+          "description": {
+            "pt-BR": "Traduções organizadas para comparar",
+            "en": "Translations organised for comparison"
+          }
+        },
+        {
           "name": "I Don't Need It",
           "url": "https://idontneedit.org/",
           "icon": "money-bill",
           "iconStyle": "solid",
           "description": {
-            "pt-BR": "Pense antes de comprar",
-            "en": "Think before you buy"
-          }
-        },
-        {
-          "name": "E-Books",
-          "url": "https://ebooks.sergiocabral.com/",
-          "icon": "book",
-          "iconStyle": "solid",
-          "description": {
-            "pt-BR": "Coleção de e-books",
-            "en": "E-book collection"
-          }
-        },
-        {
-          "name": "Fotografias",
-          "url": "https://fotos.sergiocabral.com/",
-          "icon": "camera-retro",
-          "iconStyle": "solid",
-          "description": {
-            "pt-BR": "Fotos que eu tirei",
-            "en": "Photos I have taken"
+            "pt-BR": "Uma pausa antes da compra por impulso",
+            "en": "A pause before the impulse buy"
           }
         },
         {
@@ -262,8 +262,8 @@
           "icon": "git-alt",
           "iconStyle": "brands",
           "description": {
-            "pt-BR": "Aprenda Git na prática",
-            "en": "Learn Git hands-on"
+            "pt-BR": "Visualize o que cada comando do Git faz",
+            "en": "See what each Git command actually does"
           }
         },
         {
@@ -277,13 +277,33 @@
           }
         },
         {
+          "name": "E-Books",
+          "url": "https://ebooks.sergiocabral.com/",
+          "icon": "book",
+          "iconStyle": "solid",
+          "description": {
+            "pt-BR": "Meus livros, de graça",
+            "en": "My books, free to read"
+          }
+        },
+        {
+          "name": "Fotografias",
+          "url": "https://fotos.sergiocabral.com/",
+          "icon": "camera-retro",
+          "iconStyle": "solid",
+          "description": {
+            "pt-BR": "Ensaios e registros que eu fiz",
+            "en": "Photo essays and shots of mine"
+          }
+        },
+        {
           "name": "Repositórios",
           "url": "https://github.com/sergiocabral?tab=repositories",
           "icon": "github",
           "iconStyle": "brands",
           "description": {
-            "pt-BR": "Mais de 100 projetos abertos",
-            "en": "Over 100 open projects"
+            "pt-BR": "Mais de 100 projetos abertos no GitHub",
+            "en": "Over 100 open projects on GitHub"
           }
         }
       ]
