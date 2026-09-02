@@ -1,6 +1,6 @@
 import { useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
-import { type Group, MathUtils, type Mesh } from 'three';
+import { type Group, MathUtils } from 'three';
 import { world } from '../data';
 import { useGameStore } from '../store/gameStore';
 import { clampToBounds, slideMove, toBoxes } from './collision';
@@ -15,10 +15,24 @@ import {
   ZONE_HYSTERESIS,
 } from './constants';
 import type { InputState } from './input/useInput';
-import { PALETTE } from './palette';
 
 /** Posição do personagem, lida pela câmera sem passar pelo estado do React. */
 export type PlayerRef = { x: number; z: number };
+
+/**
+ * Cores do cavalinho.
+ *
+ * Ele é uma piada visível: o personagem é um cavalo, referência direta ao
+ * gohorse.dev — a metodologia eXtreme Go Horse. Um alazão baixinho e cabeçudo,
+ * no mesmo registro arredondado do resto do mundo.
+ */
+const HORSE = {
+  body: '#b5763f',
+  bodyDark: '#9c6033',
+  mane: '#5f3f22',
+  hoof: '#33261a',
+  muzzle: '#d0a878',
+} as const;
 
 type Props = {
   input: React.RefObject<InputState>;
@@ -28,19 +42,24 @@ type Props = {
 /**
  * O personagem e toda a sua simulação.
  *
- * As proporções são chibi — cabeça quase do tamanho do tronco — que é o que faz
- * um boneco simples parecer um personagem em vez de um manequim. Braços e
- * pernas são animados por seno em contrafase, o suficiente para ler como
- * caminhada sem esqueleto nem modelo baixado.
+ * A geometria é a de um cavalo, mas a física é a mesma de antes: quem controla —
+ * teclado, joystick ou piloto automático — escreve no mesmo objeto de entrada, e
+ * o movimento, a colisão e a detecção de zona não sabem que trocou o boneco.
+ *
+ * As quatro pernas são animadas em trote: os pares na diagonal (dianteira
+ * esquerda com traseira direita, e vice-versa) se movem juntos. Isso cai
+ * naturalmente da máquina de animação herdada, que já movia dois pares em
+ * contrafase.
  */
 export function Player({ input, position }: Props) {
   const group = useRef<Group>(null);
   const body = useRef<Group>(null);
-  const legLeft = useRef<Mesh>(null);
-  const legRight = useRef<Mesh>(null);
-  const armLeft = useRef<Mesh>(null);
-  const armRight = useRef<Mesh>(null);
   const head = useRef<Group>(null);
+  // Nomes herdados da simulação; aqui cada um é uma perna do cavalo.
+  const legLeft = useRef<Group>(null); // traseira esquerda
+  const legRight = useRef<Group>(null); // traseira direita
+  const armLeft = useRef<Group>(null); // dianteira esquerda
+  const armRight = useRef<Group>(null); // dianteira direita
 
   const boxes = useMemo(() => toBoxes(world.obstacles), []);
   const velocity = useRef({ x: 0, z: 0 });
@@ -117,73 +136,120 @@ export function Player({ input, position }: Props) {
   return (
     <group ref={group} position={[world.spawn[0], 0, world.spawn[1]]}>
       <group ref={body}>
-        {/* Pernas curtas e grossas, para acompanhar a cabeça grande. */}
-        <mesh ref={legLeft} position={[-0.16, 0.22, 0]}>
-          <capsuleGeometry args={[0.11, 0.2, 4, 8]} />
-          <meshLambertMaterial color={PALETTE.boot} />
-        </mesh>
-        <mesh ref={legRight} position={[0.16, 0.22, 0]}>
-          <capsuleGeometry args={[0.11, 0.2, 4, 8]} />
-          <meshLambertMaterial color={PALETTE.boot} />
+        {/* Pernas. Cada uma gira a partir do quadril (o topo do grupo), para o
+            balanço parecer uma passada, e não um retângulo pivotando no meio. */}
+        <Leg reference={armLeft} x={-0.17} z={0.26} />
+        <Leg reference={armRight} x={0.17} z={0.26} />
+        <Leg reference={legLeft} x={-0.17} z={-0.26} />
+        <Leg reference={legRight} x={0.17} z={-0.26} />
+
+        {/* Tronco: uma cápsula deitada ao longo do eixo de avanço (+Z é a frente). */}
+        <mesh position={[0, 0.62, 0]} rotation={[Math.PI / 2, 0, 0]} castShadow>
+          <capsuleGeometry args={[0.28, 0.62, 6, 12]} />
+          <meshLambertMaterial color={HORSE.body} flatShading />
         </mesh>
 
-        {/* Túnica: tronco de cone, mais largo embaixo. */}
-        <mesh position={[0, 0.62, 0]} castShadow>
-          <cylinderGeometry args={[0.26, 0.4, 0.62, 12]} />
-          <meshLambertMaterial color={PALETTE.tunic} flatShading />
-        </mesh>
-        <mesh position={[0, 0.34, 0]}>
-          <cylinderGeometry args={[0.41, 0.42, 0.1, 12]} />
-          <meshLambertMaterial color={PALETTE.tunicDark} />
+        {/* Garupa um pouco mais alta, para o corpo não ser um tubo reto. */}
+        <mesh position={[0, 0.68, -0.32]}>
+          <sphereGeometry args={[0.3, 14, 12]} />
+          <meshLambertMaterial color={HORSE.body} flatShading />
         </mesh>
 
-        <mesh ref={armLeft} position={[-0.34, 0.74, 0]}>
-          <capsuleGeometry args={[0.085, 0.24, 4, 8]} />
-          <meshLambertMaterial color={PALETTE.tunicDark} />
-        </mesh>
-        <mesh ref={armRight} position={[0.34, 0.74, 0]}>
-          <capsuleGeometry args={[0.085, 0.24, 4, 8]} />
-          <meshLambertMaterial color={PALETTE.tunicDark} />
+        {/* Rabo. */}
+        <mesh position={[0, 0.62, -0.6]} rotation={[0.5, 0, 0]}>
+          <coneGeometry args={[0.12, 0.5, 8]} />
+          <meshLambertMaterial color={HORSE.mane} flatShading />
         </mesh>
 
-        <group ref={head} position={[0, 1.18, 0]}>
+        {/* Pescoço, subindo à frente. */}
+        <mesh position={[0, 0.86, 0.32]} rotation={[-0.5, 0, 0]}>
+          <cylinderGeometry args={[0.16, 0.22, 0.5, 10]} />
+          <meshLambertMaterial color={HORSE.body} flatShading />
+        </mesh>
+
+        <group ref={head} position={[0, 1.12, 0.46]}>
+          {/* Cabeça grande e chibi. */}
           <mesh castShadow>
-            <sphereGeometry args={[0.34, 16, 14]} />
-            <meshLambertMaterial color={PALETTE.skin} />
+            <boxGeometry args={[0.3, 0.34, 0.4]} />
+            <meshLambertMaterial color={HORSE.body} flatShading />
           </mesh>
-
-          {/* Cabelo como calota, deixando o rosto livre. */}
-          <mesh position={[0, 0.06, -0.04]}>
-            <sphereGeometry args={[0.345, 16, 14, 0, Math.PI * 2, 0, Math.PI / 1.9]} />
-            <meshLambertMaterial color={PALETTE.hair} />
+          {/* Focinho mais claro, apontando para a frente. */}
+          <mesh position={[0, -0.06, 0.26]}>
+            <boxGeometry args={[0.22, 0.2, 0.2]} />
+            <meshLambertMaterial color={HORSE.muzzle} flatShading />
           </mesh>
-
-          {/* Olhos: é o que dá direção ao personagem quando ele gira. */}
-          <mesh position={[-0.12, -0.02, 0.3]}>
-            <sphereGeometry args={[0.045, 8, 8]} />
+          {/* Narinas. */}
+          <mesh position={[-0.06, -0.08, 0.37]}>
+            <sphereGeometry args={[0.025, 6, 6]} />
             <meshBasicMaterial color="#2b2b33" />
           </mesh>
-          <mesh position={[0.12, -0.02, 0.3]}>
-            <sphereGeometry args={[0.045, 8, 8]} />
+          <mesh position={[0.06, -0.08, 0.37]}>
+            <sphereGeometry args={[0.025, 6, 6]} />
             <meshBasicMaterial color="#2b2b33" />
           </mesh>
 
-          {/* Gorro pontudo, na linha do herói de RPG. */}
-          <mesh position={[0, 0.32, -0.08]} rotation={[-0.38, 0, 0]}>
-            <coneGeometry args={[0.3, 0.66, 12]} />
-            <meshLambertMaterial color={PALETTE.tunic} flatShading />
+          {/* Olhos: dão a direção do personagem quando ele gira. */}
+          <mesh position={[-0.13, 0.06, 0.16]}>
+            <sphereGeometry args={[0.05, 8, 8]} />
+            <meshBasicMaterial color="#2b2b33" />
           </mesh>
-          <mesh position={[0, 0.14, 0]}>
-            <cylinderGeometry args={[0.35, 0.35, 0.09, 14]} />
-            <meshLambertMaterial color={PALETTE.tunicDark} />
+          <mesh position={[0.13, 0.06, 0.16]}>
+            <sphereGeometry args={[0.05, 8, 8]} />
+            <meshBasicMaterial color="#2b2b33" />
+          </mesh>
+
+          {/* Orelhas. */}
+          <mesh position={[-0.1, 0.22, -0.02]} rotation={[0, 0, -0.2]}>
+            <coneGeometry args={[0.06, 0.16, 6]} />
+            <meshLambertMaterial color={HORSE.body} flatShading />
+          </mesh>
+          <mesh position={[0.1, 0.22, -0.02]} rotation={[0, 0, 0.2]}>
+            <coneGeometry args={[0.06, 0.16, 6]} />
+            <meshLambertMaterial color={HORSE.body} flatShading />
+          </mesh>
+
+          {/* Topete da crina, entre as orelhas. */}
+          <mesh position={[0, 0.2, -0.12]} rotation={[0.4, 0, 0]}>
+            <coneGeometry args={[0.1, 0.24, 6]} />
+            <meshLambertMaterial color={HORSE.mane} flatShading />
           </mesh>
         </group>
+
+        {/* Crina, descendo pela nuca. */}
+        <mesh position={[0, 0.98, 0.18]} rotation={[-0.5, 0, 0]}>
+          <boxGeometry args={[0.1, 0.44, 0.14]} />
+          <meshLambertMaterial color={HORSE.mane} flatShading />
+        </mesh>
       </group>
 
-      {/* Sombra pintada, presa aos pés. */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.03, 0]}>
-        <circleGeometry args={[0.42, 18]} />
-        <meshBasicMaterial color="#2f5d2a" transparent opacity={0.3} />
+      {/* Sombra pintada, presa ao chão sob o cavalo. */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.03, 0]} scale={[1, 1.35, 1]}>
+        <circleGeometry args={[0.42, 20]} />
+        <meshBasicMaterial color="#2f5d2a" transparent opacity={0.28} />
+      </mesh>
+    </group>
+  );
+}
+
+/** Uma perna que pivota no quadril: o casco fica na ponta de baixo. */
+function Leg({
+  reference,
+  x,
+  z,
+}: {
+  reference: React.RefObject<Group | null>;
+  x: number;
+  z: number;
+}) {
+  return (
+    <group ref={reference} position={[x, 0.46, z]}>
+      <mesh position={[0, -0.2, 0]}>
+        <boxGeometry args={[0.13, 0.42, 0.14]} />
+        <meshLambertMaterial color={HORSE.bodyDark} flatShading />
+      </mesh>
+      <mesh position={[0, -0.42, 0.01]}>
+        <boxGeometry args={[0.15, 0.08, 0.16]} />
+        <meshLambertMaterial color={HORSE.hoof} />
       </mesh>
     </group>
   );
@@ -192,18 +258,18 @@ export function Player({ input, position }: Props) {
 type Parts = {
   body: React.RefObject<Group | null>;
   head: React.RefObject<Group | null>;
-  legLeft: React.RefObject<Mesh | null>;
-  legRight: React.RefObject<Mesh | null>;
-  armLeft: React.RefObject<Mesh | null>;
-  armRight: React.RefObject<Mesh | null>;
+  legLeft: React.RefObject<Group | null>;
+  legRight: React.RefObject<Group | null>;
+  armLeft: React.RefObject<Group | null>;
+  armRight: React.RefObject<Group | null>;
 };
 
 /**
- * Caminhada e ociosidade.
+ * Trote e ociosidade.
  *
- * Andando: pernas e braços em contrafase, com um salto do corpo a cada passo.
- * Parado: só a respiração. A troca é por interpolação da amplitude, então não
- * existe um corte entre os dois estados.
+ * Andando: as quatro pernas em contrafase cruzada, formando os pares diagonais
+ * do trote, com um pulinho do corpo a cada batida. Parado: só a respiração. A
+ * troca é por interpolação da amplitude, então não há corte entre os estados.
  */
 function animate(
   parts: Parts,
@@ -215,24 +281,25 @@ function animate(
   const intensity = Math.min(speed / PLAYER_SPEED, 1);
   phase.current += speed * delta * 2.6;
 
-  const swing = Math.sin(phase.current * 2) * 0.55 * intensity;
+  const swing = Math.sin(phase.current * 2) * 0.6 * intensity;
 
-  if (parts.legLeft.current) parts.legLeft.current.rotation.x = swing;
+  // Pares diagonais: traseira-direita com dianteira-esquerda, e o oposto.
   if (parts.legRight.current) parts.legRight.current.rotation.x = -swing;
-  if (parts.armLeft.current) parts.armLeft.current.rotation.x = -swing * 0.8;
-  if (parts.armRight.current) parts.armRight.current.rotation.x = swing * 0.8;
+  if (parts.armLeft.current) parts.armLeft.current.rotation.x = -swing;
+  if (parts.legLeft.current) parts.legLeft.current.rotation.x = swing;
+  if (parts.armRight.current) parts.armRight.current.rotation.x = swing;
 
   if (parts.body.current) {
-    // O salto tem o dobro da frequência do passo: sobe a cada pé que toca o chão.
-    const bounce = Math.abs(Math.sin(phase.current * 2)) * 0.07 * intensity;
+    // O pulo tem o dobro da frequência da passada: sobe a cada batida diagonal.
+    const bounce = Math.abs(Math.sin(phase.current * 2)) * 0.06 * intensity;
     const breathing = Math.sin(elapsed * 2) * 0.012 * (1 - intensity);
     parts.body.current.position.y = bounce + breathing;
-    parts.body.current.rotation.z = Math.sin(phase.current * 2) * 0.05 * intensity;
+    parts.body.current.rotation.x = Math.sin(phase.current * 2) * 0.04 * intensity;
   }
 
   if (parts.head.current) {
-    // A cabeça atrasa um pouco em relação ao corpo, o que dá peso ao movimento.
-    parts.head.current.rotation.z = -Math.sin(phase.current * 2 - 0.4) * 0.06 * intensity;
+    // A cabeça acena junto do galope, o que dá vida ao movimento.
+    parts.head.current.rotation.x = Math.sin(phase.current * 2 - 0.4) * 0.05 * intensity;
   }
 }
 
