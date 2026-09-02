@@ -15,12 +15,14 @@ export function NotFoundPage() {
         description={pick(content.profile.seo.description, locale)}
         path="/404.html"
       />
-      <h1>404</h1>
-      <p>{t('notFound', locale)}</p>
-      <p>{t('notFoundBody', locale)}</p>
-      <Link className="info__cta" to="/">
-        {t('goHome', locale)}
-      </Link>
+      <div className="notfound__panel frame">
+        <h1>404</h1>
+        <p>{t('notFound', locale)}</p>
+        <p>{t('notFoundBody', locale)}</p>
+        <Link className="info__cta" to="/">
+          {t('goHome', locale)}
+        </Link>
+      </div>
     </main>
   );
 }

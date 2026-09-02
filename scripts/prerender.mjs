@@ -129,7 +129,7 @@ function infoBody() {
     })
     .join('\n');
 
-  return `<main class="info"><div class="info__inner">
+  return `<main class="info"><div class="info__inner frame">
   <header class="info__header">
     <div>
       <h1>${escape(profile.name)}</h1>
@@ -152,7 +152,7 @@ function gameBody() {
   return `<div class="game"><div class="loading">
   <h1 class="visually-hidden">${escape(profile.name)} — ${escape(profile.role['pt-BR'])}</h1>
   <span class="loading__label">Carregando o mundo…</span>
-  <div class="loading__bar"><div class="loading__fill" style="width:45%"></div></div>
+  <div class="loading__bar"><div class="loading__fill"></div></div>
   <noscript><a href="/info/">Ver todo o conteúdo em texto</a></noscript>
 </div></div>`;
 }

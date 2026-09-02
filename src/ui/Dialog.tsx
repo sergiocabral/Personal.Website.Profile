@@ -81,7 +81,7 @@ export function Dialog() {
       }}
     >
       <div
-        className="dialog"
+        className="dialog frame"
         ref={panel}
         role="dialog"
         aria-modal="true"
@@ -173,7 +173,7 @@ function Typewriter({ text: full }: { text: string }) {
     <>
       <p className="dialog__greeting" aria-hidden="true">
         {full.slice(0, count)}
-        {done ? null : <span className="dialog__caret">&nbsp;</span>}
+        {done ? null : <span className="dialog__caret" />}
       </p>
       <p className="visually-hidden">{full}</p>
     </>

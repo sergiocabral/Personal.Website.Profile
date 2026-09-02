@@ -1,14 +1,29 @@
+/*
+ * Interface do jogo.
+ *
+ * A caixa de diálogo segue a gramática dos RPGs de 8 e 16 bits: fundo escuro
+ * quase opaco, moldura clara de dois traços, cantos marcados e uma seta piscando
+ * quando há mais a ler. A fonte pixelada aparece só em títulos e rótulos curtos
+ * — em texto corrido ela cansa e prejudica quem tem dificuldade de leitura, e o
+ * conteúdo aqui é o que importa.
+ */
+
 :root {
-  --accent: #1af1f2;
+  --sky: #8fd9f2;
+  --grass: #79c942;
   --brand: #ffd602;
-  --bg: #0d1117;
-  --bg-elevated: rgba(255, 255, 255, 0.06);
-  --border: rgba(255, 255, 255, 0.14);
-  --text: rgba(255, 255, 255, 0.92);
-  --text-dim: rgba(255, 255, 255, 0.6);
-  --radius: 14px;
-  --font-display: 'Encode Sans SC', system-ui, sans-serif;
-  --font-body: 'Roboto', system-ui, -apple-system, sans-serif;
+  --accent: #1af1f2;
+
+  --box: #1a2440;
+  --box-soft: #24325a;
+  --frame: #f6e7c6;
+  --frame-shadow: #8a6a49;
+
+  --text: #f6f1e4;
+  --text-dim: #b3bdd6;
+
+  --font-pixel: 'Press Start 2P', 'Courier New', monospace;
+  --font-body: 'Nunito', system-ui, -apple-system, sans-serif;
 
   color-scheme: dark;
 }
@@ -22,11 +37,11 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background: var(--bg);
+  background: var(--sky);
   color: var(--text);
   font-family: var(--font-body);
-  font-weight: 300;
   overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #root {
@@ -36,10 +51,10 @@ body {
 h1,
 h2,
 h3 {
-  font-family: var(--font-display);
-  font-weight: 200;
   margin: 0;
-  letter-spacing: 0.02em;
+  font-family: var(--font-pixel);
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 a {
@@ -52,9 +67,8 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 4px;
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
 }
 
 .visually-hidden {
@@ -74,6 +88,22 @@ button {
   margin: 4rem auto;
   padding: 0 1.5rem;
   text-align: center;
+  color: var(--box);
+}
+
+/*
+ * Moldura de caixa de RPG: duas bordas concêntricas com uma sombra sólida
+ * deslocada, sem desfoque. Sombra difusa é linguagem de interface moderna e
+ * quebraria a leitura retrô.
+ */
+.frame {
+  background: var(--box);
+  border: 3px solid var(--frame);
+  border-radius: 8px;
+  box-shadow:
+    inset 0 0 0 3px var(--box),
+    inset 0 0 0 6px var(--frame-shadow),
+    0 5px 0 rgba(0, 0, 0, 0.35);
 }
 
 /* ---------------------------------------------------------------- jogo --- */
@@ -84,6 +114,7 @@ button {
   width: 100%;
   overflow: hidden;
   touch-action: none;
+  background: var(--sky);
 }
 
 .game canvas {
@@ -95,31 +126,49 @@ button {
   inset: 0;
   display: grid;
   place-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
   justify-items: center;
-  background: var(--bg);
+  background: linear-gradient(180deg, var(--sky), #cfeffb 60%, var(--grass));
   z-index: 20;
+  padding: 2rem;
+  text-align: center;
+}
+
+.loading__label {
+  font-family: var(--font-pixel);
+  font-size: clamp(0.6rem, 2.5vw, 0.8rem);
+  color: var(--box);
+  line-height: 1.8;
 }
 
 .loading__bar {
-  width: min(16rem, 60vw);
-  height: 3px;
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 2px;
-  overflow: hidden;
+  width: min(18rem, 70vw);
+  height: 1rem;
+  padding: 3px;
+  background: var(--box);
+  border: 3px solid var(--frame);
+  border-radius: 4px;
 }
 
 .loading__fill {
   height: 100%;
-  background: var(--accent);
-  transition: width 0.25s ease-out;
+  background: var(--brand);
+  border-radius: 1px;
+  animation: loading-slide 1.4s ease-in-out infinite;
 }
 
-.loading__label {
-  color: var(--text-dim);
-  font-size: 0.9rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+@keyframes loading-slide {
+  0% {
+    width: 12%;
+    margin-left: 0;
+  }
+  50% {
+    width: 55%;
+  }
+  100% {
+    width: 12%;
+    margin-left: 88%;
+  }
 }
 
 /* ----------------------------------------------------------------- hud --- */
@@ -129,91 +178,121 @@ button {
   inset: 0;
   pointer-events: none;
   z-index: 10;
-  padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right))
-    max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+  padding: max(0.9rem, env(safe-area-inset-top)) max(0.9rem, env(safe-area-inset-right))
+    max(0.9rem, env(safe-area-inset-bottom)) max(0.9rem, env(safe-area-inset-left));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 .hud__row {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
+/* Placa de nome, como o painel de status de um RPG. */
 .hud__identity {
   pointer-events: none;
+  padding: 0.6rem 0.9rem;
+  max-width: min(60vw, 22rem);
 }
 
 .hud__identity h1 {
-  font-size: clamp(1.1rem, 3.5vw, 1.6rem);
+  font-size: clamp(0.62rem, 2.6vw, 0.85rem);
+  color: var(--brand);
 }
 
 .hud__identity p {
-  margin: 0.15rem 0 0;
+  margin: 0.5rem 0 0;
+  font-size: clamp(0.62rem, 2.2vw, 0.75rem);
   color: var(--text-dim);
-  font-size: 0.85rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
 }
 
 .hud__controls {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.4rem;
   pointer-events: auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .hud__button {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 0.45rem 0.9rem;
-  font-size: 0.8rem;
+  font-family: var(--font-pixel);
+  font-size: clamp(0.5rem, 1.9vw, 0.62rem);
+  padding: 0.6rem 0.7rem;
+  background: var(--box);
+  color: var(--text);
+  border: 3px solid var(--frame);
+  border-radius: 6px;
+  box-shadow: 0 4px 0 var(--frame-shadow);
   cursor: pointer;
-  backdrop-filter: blur(8px);
   text-decoration: none;
+  line-height: 1;
   transition:
-    border-color 0.15s ease,
-    background 0.15s ease;
+    transform 0.08s ease,
+    box-shadow 0.08s ease,
+    background 0.12s ease;
 }
 
 .hud__button:hover {
-  border-color: var(--accent);
-  background: rgba(26, 241, 242, 0.1);
+  background: var(--box-soft);
+}
+
+/* Afunda ao clicar, como um botão físico. */
+.hud__button:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--frame-shadow);
 }
 
 .hud__button[aria-pressed='true'] {
-  border-color: var(--accent);
-  color: var(--accent);
+  background: var(--brand);
+  color: var(--box);
 }
 
+.hud__footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+/* Progresso: uma marca por seção, como corações de vida. */
 .hud__progress {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.35rem;
   align-items: center;
+  padding: 0.5rem 0.6rem;
   pointer-events: none;
 }
 
 .hud__pip {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  transition: background 0.3s ease;
+  width: 0.85rem;
+  height: 0.85rem;
+  background: var(--box-soft);
+  border: 2px solid var(--frame-shadow);
+  border-radius: 3px;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
 }
 
 .hud__pip--done {
   background: var(--brand);
-  border-color: var(--brand);
+  border-color: var(--frame);
+  transform: rotate(45deg);
 }
 
 .hud__hint {
-  color: var(--text-dim);
-  font-size: 0.8rem;
-  text-align: center;
+  font-family: var(--font-pixel);
+  font-size: clamp(0.48rem, 1.9vw, 0.6rem);
+  line-height: 1.8;
+  color: var(--text);
+  padding: 0.55rem 0.8rem;
   pointer-events: none;
+  text-align: center;
 }
 
 /* -------------------------------------------------------------- prompt --- */
@@ -221,43 +300,43 @@ button {
 .prompt {
   position: absolute;
   left: 50%;
-  bottom: clamp(5rem, 18vh, 9rem);
+  bottom: clamp(6rem, 20vh, 10rem);
   transform: translateX(-50%);
   z-index: 12;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.6rem 1.1rem;
-  background: rgba(13, 17, 23, 0.85);
-  border: 1px solid var(--accent);
-  border-radius: 999px;
-  backdrop-filter: blur(8px);
+  gap: 0.7rem;
+  padding: 0.7rem 1rem;
+  font-family: var(--font-pixel);
+  font-size: clamp(0.5rem, 2vw, 0.65rem);
+  line-height: 1.6;
   cursor: pointer;
-  animation: prompt-in 0.2s ease-out;
   pointer-events: auto;
+  animation: prompt-bob 1.1s ease-in-out infinite;
+  max-width: min(92vw, 26rem);
+  text-align: left;
 }
 
 .prompt__key {
   display: grid;
   place-content: center;
-  min-width: 1.6rem;
-  height: 1.6rem;
-  padding: 0 0.35rem;
+  min-width: 2rem;
+  height: 2rem;
+  background: var(--brand);
+  color: var(--box);
+  border: 3px solid var(--frame);
   border-radius: 5px;
-  background: var(--accent);
-  color: #04212a;
-  font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
+  flex-shrink: 0;
 }
 
-@keyframes prompt-in {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 0.5rem);
-  }
-  to {
-    opacity: 1;
+@keyframes prompt-bob {
+  0%,
+  100% {
     transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -0.4rem);
   }
 }
 
@@ -265,13 +344,14 @@ button {
 
 .joystick {
   position: absolute;
-  left: max(1.5rem, env(safe-area-inset-left));
-  bottom: max(1.5rem, env(safe-area-inset-bottom));
+  left: max(1.2rem, env(safe-area-inset-left));
+  bottom: max(1.2rem, env(safe-area-inset-bottom));
   width: 8.5rem;
   height: 8.5rem;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border);
+  background: rgba(26, 36, 64, 0.5);
+  border: 4px solid var(--frame);
+  box-shadow: 0 4px 0 var(--frame-shadow);
   z-index: 11;
   touch-action: none;
   pointer-events: auto;
@@ -281,12 +361,12 @@ button {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 3.2rem;
-  height: 3.2rem;
-  margin: -1.6rem 0 0 -1.6rem;
+  width: 3.4rem;
+  height: 3.4rem;
+  margin: -1.7rem 0 0 -1.7rem;
   border-radius: 50%;
-  background: rgba(26, 241, 242, 0.35);
-  border: 1px solid var(--accent);
+  background: var(--brand);
+  border: 4px solid var(--frame);
   will-change: transform;
 }
 
@@ -298,9 +378,9 @@ button {
   z-index: 30;
   display: grid;
   place-items: end center;
-  background: rgba(6, 9, 13, 0.55);
-  padding: 1rem;
-  animation: fade-in 0.18s ease-out;
+  background: rgba(10, 16, 34, 0.45);
+  padding: 0.75rem;
+  animation: fade-in 0.15s ease-out;
 }
 
 @keyframes fade-in {
@@ -314,32 +394,30 @@ button {
 
 .dialog {
   width: min(46rem, 100%);
-  max-height: min(78vh, 40rem);
+  max-height: min(80vh, 42rem);
   display: flex;
   flex-direction: column;
-  background: linear-gradient(180deg, rgba(24, 32, 44, 0.98), rgba(15, 20, 28, 0.98));
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
-  animation: dialog-in 0.22s cubic-bezier(0.2, 0.9, 0.3, 1);
+  animation: dialog-in 0.18s steps(3);
   margin-bottom: max(0.5rem, env(safe-area-inset-bottom));
 }
 
+/* Abre em degraus, não suave: é assim que uma janela de RPG aparece. */
 @keyframes dialog-in {
   from {
     opacity: 0;
-    transform: translateY(1.5rem);
+    transform: scaleY(0.4) translateY(2rem);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scaleY(1) translateY(0);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .dialog,
   .dialog-backdrop,
-  .prompt {
+  .prompt,
+  .loading__fill {
     animation: none;
   }
 }
@@ -347,18 +425,19 @@ button {
 .dialog__header {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid var(--border);
+  gap: 0.8rem;
+  padding: 0.9rem 1rem;
+  border-bottom: 3px solid var(--frame-shadow);
 }
 
 .dialog__avatar {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
+  width: 3.2rem;
+  height: 3.2rem;
   object-fit: cover;
-  border: 1px solid var(--accent);
+  border: 3px solid var(--frame);
+  border-radius: 6px;
   flex-shrink: 0;
+  image-rendering: auto;
 }
 
 .dialog__title {
@@ -367,52 +446,58 @@ button {
 }
 
 .dialog__title h2 {
-  font-size: 1.15rem;
+  font-size: clamp(0.68rem, 2.6vw, 0.9rem);
+  color: var(--brand);
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
 .dialog__title p {
-  margin: 0.1rem 0 0;
-  font-size: 0.78rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  margin: 0.45rem 0 0;
+  font-size: 0.8rem;
   color: var(--text-dim);
 }
 
 .dialog__close {
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  width: 2rem;
-  height: 2rem;
+  background: var(--box-soft);
+  border: 3px solid var(--frame);
+  border-radius: 6px;
+  width: 2.4rem;
+  height: 2.4rem;
   cursor: pointer;
   line-height: 1;
   flex-shrink: 0;
+  box-shadow: 0 3px 0 var(--frame-shadow);
 }
 
-.dialog__close:hover {
-  border-color: var(--accent);
+.dialog__close:active {
+  transform: translateY(3px);
+  box-shadow: none;
 }
 
 .dialog__body {
-  padding: 1.1rem 1.25rem 1.35rem;
+  padding: 1rem;
   overflow-y: auto;
 }
 
 .dialog__greeting {
-  margin: 0 0 1rem;
-  font-size: 1rem;
-  line-height: 1.6;
-  min-height: 3.2em;
+  margin: 0 0 1.1rem;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  min-height: 3.4em;
 }
 
+/* Cursor de "continue", o triângulo piscante das caixas de fala. */
 .dialog__caret {
   display: inline-block;
-  width: 0.5ch;
-  background: var(--accent);
-  animation: blink 1s steps(2) infinite;
+  width: 0;
+  height: 0;
+  margin-left: 0.3rem;
+  border-left: 0.45rem solid var(--brand);
+  border-top: 0.32rem solid transparent;
+  border-bottom: 0.32rem solid transparent;
+  animation: blink 0.8s steps(2) infinite;
 }
 
 @keyframes blink {
@@ -422,8 +507,8 @@ button {
 }
 
 .dialog__prose p {
-  margin: 0 0 0.85rem;
-  line-height: 1.65;
+  margin: 0 0 0.9rem;
+  line-height: 1.75;
 }
 
 .dialog__prose p:last-child {
@@ -432,7 +517,7 @@ button {
 
 .dialog__prose strong {
   color: var(--brand);
-  font-weight: 400;
+  font-weight: 800;
 }
 
 /* ---------------------------------------------------------- lista links -- */
@@ -443,36 +528,38 @@ button {
   padding: 0;
   display: grid;
   gap: 0.5rem;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr));
 }
 
 .links__item a {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.65rem 0.85rem;
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  gap: 0.7rem;
+  padding: 0.7rem 0.8rem;
+  background: var(--box-soft);
+  border: 3px solid var(--frame-shadow);
+  border-radius: 6px;
   text-decoration: none;
   color: var(--text);
   transition:
-    border-color 0.15s ease,
-    transform 0.15s ease,
-    background 0.15s ease;
+    border-color 0.12s ease,
+    transform 0.12s ease,
+    background 0.12s ease;
 }
 
 .links__item a:hover,
 .links__item a:focus-visible {
-  border-color: var(--accent);
-  background: rgba(26, 241, 242, 0.07);
-  transform: translateY(-1px);
+  border-color: var(--brand);
+  background: #2c3c6b;
+  transform: translateY(-2px);
 }
 
 .links__icon {
-  width: 1.35rem;
+  width: 1.5rem;
   text-align: center;
-  color: var(--accent);
+  color: var(--brand);
   flex-shrink: 0;
+  font-size: 1.05rem;
 }
 
 .links__text {
@@ -481,7 +568,8 @@ button {
 
 .links__name {
   display: block;
-  font-weight: 400;
+  font-weight: 700;
+  font-size: 0.92rem;
 }
 
 .links__desc {
@@ -494,89 +582,92 @@ button {
 
 .info {
   min-height: 100%;
-  padding: clamp(2rem, 6vw, 4rem) 1.25rem;
-  background:
-    radial-gradient(1200px 600px at 50% -10%, rgba(26, 241, 242, 0.08), transparent), var(--bg);
+  padding: clamp(1.5rem, 5vw, 3.5rem) 1rem;
+  background: linear-gradient(180deg, var(--sky), #cfeffb 45%, var(--grass) 100%);
 }
 
 .info__inner {
   max-width: 52rem;
   margin: 0 auto;
+  padding: clamp(1.2rem, 4vw, 2.5rem);
 }
 
 .info__header {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  margin-bottom: 2.5rem;
+  gap: 1.1rem;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
+  padding-bottom: 1.2rem;
+  border-bottom: 3px solid var(--frame-shadow);
 }
 
 .info__avatar {
-  width: 5.5rem;
-  height: 5.5rem;
-  border-radius: 50%;
+  width: 4.5rem;
+  height: 4.5rem;
   object-fit: cover;
-  border: 1px solid var(--accent);
-  box-shadow: 0 0 30px rgba(26, 241, 242, 0.25);
+  border: 3px solid var(--frame);
+  border-radius: 8px;
 }
 
 .info__header h1 {
-  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-size: clamp(0.85rem, 3.5vw, 1.3rem);
+  color: var(--brand);
 }
 
 .info__header p {
-  margin: 0.2rem 0 0;
+  margin: 0.6rem 0 0;
   color: var(--text-dim);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 
 .info__section {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .info__section h2 {
-  font-size: 1.3rem;
+  font-size: clamp(0.7rem, 2.8vw, 0.95rem);
   display: flex;
   align-items: center;
   gap: 0.6rem;
   margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.info__section h2 svg {
+  padding-bottom: 0.7rem;
+  border-bottom: 3px solid var(--frame-shadow);
   color: var(--brand);
 }
 
 .info__footer {
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
+  margin-top: 2.5rem;
+  padding-top: 1.2rem;
+  border-top: 3px solid var(--frame-shadow);
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
   color: var(--text-dim);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 
 .info__cta {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.6rem 1.1rem;
-  border: 1px solid var(--accent);
-  border-radius: 999px;
+  padding: 0.75rem 1.1rem;
+  font-family: var(--font-pixel);
+  font-size: 0.62rem;
+  line-height: 1.6;
+  background: var(--brand);
+  color: var(--box);
+  border: 3px solid var(--frame);
+  border-radius: 6px;
+  box-shadow: 0 4px 0 var(--frame-shadow);
   text-decoration: none;
-  color: var(--accent);
 }
 
-.info__cta:hover {
-  background: rgba(26, 241, 242, 0.1);
+.info__cta:active {
+  transform: translateY(4px);
+  box-shadow: none;
 }
 
 /* ------------------------------------------------------------------- 404 */
@@ -585,17 +676,28 @@ button {
   min-height: 100%;
   display: grid;
   place-content: center;
-  gap: 1rem;
+  gap: 1.2rem;
   justify-items: center;
   text-align: center;
   padding: 2rem;
+  background: linear-gradient(180deg, var(--sky), var(--grass));
+}
+
+.notfound__panel {
+  padding: 2rem;
+  display: grid;
+  gap: 1.2rem;
+  justify-items: center;
+  max-width: 32rem;
 }
 
 .notfound h1 {
-  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-size: clamp(1.5rem, 8vw, 2.8rem);
+  color: var(--brand);
 }
 
 .notfound p {
-  color: var(--text-dim);
+  color: var(--text);
   margin: 0;
+  line-height: 1.7;
 }

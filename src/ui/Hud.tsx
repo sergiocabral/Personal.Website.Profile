@@ -15,7 +15,7 @@ export function Hud() {
   return (
     <div className="hud">
       <div className="hud__row">
-        <div className="hud__identity">
+        <div className="hud__identity frame">
           <h1>{content.profile.name}</h1>
           <p>{pick(content.profile.role, locale)}</p>
         </div>
@@ -47,7 +47,7 @@ export function Hud() {
       </div>
 
       <div className="hud__row" style={{ alignItems: 'center' }}>
-        <div className="hud__progress" aria-hidden="true">
+        <div className="hud__progress frame" aria-hidden="true">
           {content.sections.map((section) => (
             <span
               key={section.id}
@@ -57,7 +57,7 @@ export function Hud() {
         </div>
 
         {dialogOpen ? null : (
-          <p className="hud__hint">{t(touch ? 'moveHintTouch' : 'moveHint', locale)}</p>
+          <p className="hud__hint frame">{t(touch ? 'moveHintTouch' : 'moveHint', locale)}</p>
         )}
 
         <span style={{ width: '4rem' }} />

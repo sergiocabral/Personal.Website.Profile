@@ -30,7 +30,7 @@ export function InfoPage() {
         path="/info/"
       />
 
-      <div className="info__inner">
+      <div className="info__inner frame">
         <header className="info__header">
           <img className="info__avatar" src={avatar} alt="" width={88} height={88} />
           <div>

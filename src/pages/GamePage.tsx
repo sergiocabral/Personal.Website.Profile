@@ -69,11 +69,13 @@ export function GamePage() {
 
       {degraded ? (
         <div className="notfound">
-          <h1>{content.profile.name}</h1>
-          <p>{t('noWebgl', locale)}</p>
-          <Link className="info__cta" to="/info">
-            {t('skipGame', locale)}
-          </Link>
+          <div className="notfound__panel frame">
+            <h1>{content.profile.name}</h1>
+            <p>{t('noWebgl', locale)}</p>
+            <Link className="info__cta" to="/info">
+              {t('skipGame', locale)}
+            </Link>
+          </div>
         </div>
       ) : (
         <>

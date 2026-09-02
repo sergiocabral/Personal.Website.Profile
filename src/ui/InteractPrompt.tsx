@@ -17,7 +17,7 @@ export function InteractPrompt() {
   if (!section) return null;
 
   return (
-    <button type="button" className="prompt" onClick={() => open(activeZone)}>
+    <button type="button" className="prompt frame" onClick={() => open(activeZone)}>
       <span className="prompt__key" aria-hidden="true">
         {touch ? '☝' : 'E'}
       </span>
