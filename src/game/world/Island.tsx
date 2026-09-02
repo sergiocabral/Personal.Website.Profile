@@ -3,6 +3,7 @@ import { useMemo, useRef } from 'react';
 import { DoubleSide, type Mesh, type MeshLambertMaterial } from 'three';
 import { world } from '../../data';
 import { PALETTE } from '../palette';
+import { WorldEmblem } from './WorldEmblem';
 
 /**
  * O terreno: água, praia, grama, praça e os caminhos.
@@ -32,6 +33,7 @@ export function Island() {
       </mesh>
 
       <Grass />
+      <WorldEmblem />
       <Paths />
       <Plaza />
     </group>
