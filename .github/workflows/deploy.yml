@@ -1,8 +1,14 @@
-name: Deploy
+# Publicação alternativa, no GitHub Pages.
+#
+# Fica em disparo manual de propósito: quem publica o site hoje é o Netlify, e
+# dois deploys automáticos apontando para o mesmo domínio brigariam entre si.
+#
+# Para migrar para o Pages: ative Settings > Pages > Source: GitHub Actions,
+# aponte o DNS, rode este fluxo por "Run workflow" e, quando estiver no ar,
+# desconecte o Netlify e troque este gatilho por "push: branches: [main]".
+name: Deploy (GitHub Pages)
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
