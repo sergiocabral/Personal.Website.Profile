@@ -1,8 +1,6 @@
-import { Cloud, Clouds } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { EffectComposer, TiltShift2, Vignette } from '@react-three/postprocessing';
-import { Suspense, useEffect, useMemo, useRef } from 'react';
-import { BackSide, MeshBasicMaterial } from 'three';
+import { Suspense, useEffect, useRef } from 'react';
 import { world } from '../data';
 import { useGameStore } from '../store/gameStore';
 import { DioramaCamera } from './DioramaCamera';
@@ -11,6 +9,7 @@ import { Player, type PlayerRef } from './Player';
 import { useInput } from './input/useInput';
 import { Buildings } from './world/Buildings';
 import { Island } from './world/Island';
+import { Sky } from './world/Sky';
 import { Nature } from './world/Nature';
 
 /**
@@ -92,46 +91,6 @@ function Lighting() {
       <directionalLight position={[-14, 10, -10]} intensity={0.35} color={LIGHT.skyBounce} />
       <ambientLight intensity={0.4} />
     </>
-  );
-}
-
-/** Cúpula de céu e algumas nuvens acima do horizonte. */
-function Sky() {
-  // A cúpula não recebe luz: é o fundo, e sombrear o céu só o sujaria.
-  const material = useMemo(
-    () => new MeshBasicMaterial({ color: PALETTE.sky, side: BackSide, fog: false }),
-    [],
-  );
-
-  return (
-    <group>
-      <mesh material={material}>
-        <sphereGeometry args={[180, 24, 16]} />
-      </mesh>
-
-      <Clouds material={MeshBasicMaterial} limit={60}>
-        <Cloud
-          seed={11}
-          segments={20}
-          bounds={[40, 3, 40]}
-          volume={9}
-          position={[0, 32, -20]}
-          color="#ffffff"
-          opacity={0.5}
-          speed={0.08}
-        />
-        <Cloud
-          seed={4}
-          segments={14}
-          bounds={[32, 2.5, 32]}
-          volume={7}
-          position={[22, 28, 16]}
-          color={PALETTE.skyHorizon}
-          opacity={0.4}
-          speed={0.06}
-        />
-      </Clouds>
-    </group>
   );
 }
 
