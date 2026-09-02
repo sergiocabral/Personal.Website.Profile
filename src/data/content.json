@@ -64,25 +64,41 @@
           "name": "Whatsapp",
           "url": "https://wa.me/5522981842500",
           "icon": "whatsapp",
-          "iconStyle": "brands"
+          "iconStyle": "brands",
+          "description": {
+            "pt-BR": "Mensagem direta",
+            "en": "Direct message"
+          }
         },
         {
           "name": "Telegram",
           "url": "https://t.me/sergiocabral_dev",
           "icon": "telegram",
-          "iconStyle": "brands"
+          "iconStyle": "brands",
+          "description": {
+            "pt-BR": "@sergiocabral_dev",
+            "en": "@sergiocabral_dev"
+          }
         },
         {
           "name": "Discord",
           "url": "https://discord.gg/Fv85jcEEp3",
           "icon": "discord",
-          "iconStyle": "brands"
+          "iconStyle": "brands",
+          "description": {
+            "pt-BR": "Convite para o servidor",
+            "en": "Invite to the server"
+          }
         },
         {
           "name": "Guilded",
           "url": "https://www.guilded.gg/i/VkX8nblk",
           "icon": "guilded",
-          "iconStyle": "brands"
+          "iconStyle": "brands",
+          "description": {
+            "pt-BR": "Convite para o servidor",
+            "en": "Invite to the server"
+          }
         }
       ]
     },
@@ -115,13 +131,21 @@
           "name": "StackOverflow",
           "url": "https://stackexchange.com/users/1488902/sergio-cabral",
           "icon": "stack-overflow",
-          "iconStyle": "brands"
+          "iconStyle": "brands",
+          "description": {
+            "pt-BR": "Perguntas e respostas",
+            "en": "Questions and answers"
+          }
         },
         {
           "name": "LinkedIn",
           "url": "https://www.linkedin.com/in/sergiocabraljr",
           "icon": "linkedin",
-          "iconStyle": "brands"
+          "iconStyle": "brands",
+          "description": {
+            "pt-BR": "Perfil profissional",
+            "en": "Professional profile"
+          }
         },
         {
           "name": "Twitch",
@@ -137,31 +161,51 @@
           "name": "YouTube",
           "url": "https://www.youtube.com/channel/UCBBmSw69UpBbncKM2Xbw-hQ/videos",
           "icon": "youtube",
-          "iconStyle": "brands"
+          "iconStyle": "brands",
+          "description": {
+            "pt-BR": "Canal de vídeos",
+            "en": "Video channel"
+          }
         },
         {
           "name": "Instagram",
           "url": "https://www.instagram.com/sergiocabral.dev/",
           "icon": "instagram",
-          "iconStyle": "brands"
+          "iconStyle": "brands",
+          "description": {
+            "pt-BR": "@sergiocabral.dev",
+            "en": "@sergiocabral.dev"
+          }
         },
         {
           "name": "Facebook",
           "url": "https://www.facebook.com/sergiocabraljr",
           "icon": "facebook-f",
-          "iconStyle": "brands"
+          "iconStyle": "brands",
+          "description": {
+            "pt-BR": "Perfil pessoal",
+            "en": "Personal profile"
+          }
         },
         {
           "name": "Twitter",
           "url": "https://twitter.com/sergiocabraldev",
           "icon": "twitter",
-          "iconStyle": "brands"
+          "iconStyle": "brands",
+          "description": {
+            "pt-BR": "@sergiocabraldev",
+            "en": "@sergiocabraldev"
+          }
         },
         {
           "name": "about.me",
           "url": "https://about.me/sergiocabral",
           "icon": "address-card",
-          "iconStyle": "regular"
+          "iconStyle": "regular",
+          "description": {
+            "pt-BR": "Cartão de visita",
+            "en": "Business card"
+          }
         }
       ]
     },
@@ -194,7 +238,11 @@
           "name": "E-Books",
           "url": "https://ebooks.sergiocabral.com/",
           "icon": "book",
-          "iconStyle": "solid"
+          "iconStyle": "solid",
+          "description": {
+            "pt-BR": "Coleção de e-books",
+            "en": "E-book collection"
+          }
         },
         {
           "name": "Fotografias",
@@ -220,7 +268,11 @@
           "name": "Loto Number",
           "url": "https://sorteios.sergiocabral.com/",
           "icon": "sort-numeric-down",
-          "iconStyle": "solid"
+          "iconStyle": "solid",
+          "description": {
+            "pt-BR": "Sorteio de números",
+            "en": "Random number draws"
+          }
         },
         {
           "name": "Read Quickly",
