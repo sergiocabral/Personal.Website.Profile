@@ -8,8 +8,8 @@ import { useGameStore, useLocale } from '../store/gameStore';
 import { getIcon } from '../ui/icons';
 import { LinkList } from '../ui/LinkList';
 import { Markdown } from '../ui/markdown';
+import { RotatingAvatar } from '../ui/RotatingAvatar';
 import { Seo } from '../ui/Seo';
-import avatar from '../assets/profile-primary.jpg';
 
 /**
  * A página inicial: todo o conteúdo em HTML semântico.
@@ -35,7 +35,7 @@ export function HomePage() {
 
       <div className="info__inner frame">
         <header className="info__header">
-          <img className="info__avatar" src={avatar} alt="" width={88} height={88} />
+          <RotatingAvatar size="5.5rem" />
           <div className="info__identity">
             <h1>{profile.name}</h1>
             <p>{pick(profile.role, locale)}</p>

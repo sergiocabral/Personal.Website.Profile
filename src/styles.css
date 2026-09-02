@@ -798,3 +798,76 @@ button {
   gap: 0.4rem;
   margin-inline-start: auto;
 }
+
+/* --------------------------------------------------------------- avatar -- */
+
+/*
+ * Retrato giratório, herdado do site anterior.
+ *
+ * A rotação dá duas voltas por ciclo e a foto de cima aparece e some no meio
+ * dele — assim a troca acontece com a imagem já em movimento, e a transição não
+ * tem um instante em que as duas fotos aparecem paradas uma sobre a outra.
+ *
+ * O ciclo é longo de propósito: é um detalhe para quem fica, não um chamariz.
+ */
+.avatar {
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--box);
+  border: 3px solid var(--frame);
+  box-shadow:
+    0 0 14px rgba(255, 255, 255, 0.35),
+    0 0 60px var(--accent);
+}
+
+.avatar__face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  animation: avatar-spin 90s linear infinite;
+}
+
+.avatar__face--secondary {
+  animation:
+    avatar-spin 90s linear infinite,
+    avatar-swap 90s ease-in-out infinite;
+}
+
+@keyframes avatar-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(720deg);
+  }
+}
+
+@keyframes avatar-swap {
+  0%,
+  8% {
+    opacity: 0;
+  }
+  42%,
+  58% {
+    opacity: 1;
+  }
+  92%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* A rotação sai; a troca de foto fica, porque é lenta e não desloca nada. */
+  .avatar__face {
+    animation: none;
+  }
+
+  .avatar__face--secondary {
+    animation: avatar-swap 90s ease-in-out infinite;
+  }
+}

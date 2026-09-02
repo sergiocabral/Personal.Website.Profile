@@ -11,7 +11,7 @@
  * `@react-three/fiber` toca `window` já no import.
  */
 
-import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -23,6 +23,29 @@ const content = JSON.parse(readFileSync(resolve(root, 'src/data/content.json'), 
 const template = readFileSync(resolve(dist, 'index.html'), 'utf8');
 
 const { profile } = content;
+
+/*
+ * O retrato no HTML estático.
+ *
+ * Só a foto principal, com o caminho que o Vite gerou para ela. O efeito de
+ * troca depende das duas imagens empacotadas e começa quando o React assume;
+ * quem vê apenas o HTML — um crawler, por exemplo — recebe um retrato parado,
+ * que é o suficiente.
+ */
+const avatarUrl = (() => {
+  // A imagem é importada pelo JavaScript, então não aparece no HTML: o caminho
+  // com hash tem que vir da pasta de assets que o Vite acabou de gerar.
+  const file = readdirSync(resolve(dist, 'assets')).find((name) =>
+    name.startsWith('profile-primary-'),
+  );
+
+  if (!file) {
+    console.warn('  aviso: retrato não encontrado em dist/assets');
+    return profile.seo.ogImage;
+  }
+
+  return `/assets/${file}`;
+})();
 
 /** Idioma do HTML gerado. O seletor da página troca em tempo de execução. */
 const LOCALE = 'pt-BR';
@@ -135,6 +158,9 @@ function homeBody() {
 
   return `<main class="info"><div class="info__inner frame">
   <header class="info__header">
+    <div class="avatar" style="width:5.5rem;height:5.5rem">
+      <img class="avatar__face avatar__face--primary" src="${avatarUrl}" alt="" />
+    </div>
     <div class="info__identity">
       <h1>${escape(profile.name)}</h1>
       <p>${escape(profile.role[LOCALE])}</p>

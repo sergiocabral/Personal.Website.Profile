@@ -8,7 +8,7 @@ import { useGameStore, useLocale } from '../store/gameStore';
 import { getIcon } from './icons';
 import { LinkList } from './LinkList';
 import { Markdown } from './markdown';
-import avatar from '../assets/profile-primary.jpg';
+import { RotatingAvatar } from './RotatingAvatar';
 
 /**
  * Diálogo estilo RPG, em HTML sobre o canvas.
@@ -96,7 +96,7 @@ export function Dialog() {
         tabIndex={-1}
       >
         <header className="dialog__header">
-          <img className="dialog__avatar" src={avatar} alt="" width={48} height={48} />
+          <RotatingAvatar size="3.2rem" />
           <div className="dialog__title">
             <h2 id="dialog-title">
               {icon ? <FontAwesomeIcon icon={icon} aria-hidden="true" /> : null}
