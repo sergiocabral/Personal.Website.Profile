@@ -74,24 +74,28 @@ export type Zone = {
   position: Vec2;
   /** Raio de entrada do gatilho. A saída usa este raio multiplicado pela histerese. */
   radius: number;
+  /** Direção da fachada, em graus. Sempre voltada para a praça central. */
+  facing: number;
   building: {
     kind: BuildingKind;
     /** Altura do corpo principal, em unidades do mundo. */
     height: number;
     /** Largura e profundidade da base. */
     footprint: Vec2;
-    color: string;
-    roofColor: string;
+    /** Chaves da paleta em `src/game/palette.ts`, não valores hexadecimais. */
+    color: PaletteKey;
+    roofColor: PaletteKey;
     /** Rotação em graus em torno do eixo y. */
     rotation: number;
   };
-  /** Direção da fachada, em graus. Acompanha a rotação do prédio. */
-  facing: number;
 };
 
-export type BuildingKind = 'tower' | 'hall' | 'antenna' | 'board';
+/** Nome de uma cor da paleta. Mantém o tema num lugar só. */
+export type PaletteKey = string;
 
-export type PropKind = 'tree' | 'lamp' | 'bench' | 'bush' | 'fountain';
+export type BuildingKind = 'house' | 'workshop' | 'tower' | 'signboard';
+
+export type PropKind = 'tree' | 'bush' | 'flower' | 'rock' | 'lamp' | 'bench' | 'fountain';
 
 export type Prop = {
   kind: PropKind;
@@ -114,10 +118,15 @@ export type Obstacle = {
 };
 
 export type WorldData = {
-  ground: {
-    size: Vec2;
-    color: string;
-    pathColor: string;
+  island: {
+    /** Onde a grama termina e começa a areia da praia. */
+    grassRadius: number;
+    /** Onde a areia termina e começa a água. */
+    sandRadius: number;
+    /** Raio do plano de água, só para preencher o horizonte. */
+    waterRadius: number;
+    /** Praça central: a área calçada de onde saem os caminhos. */
+    plazaRadius: number;
   };
   spawn: Vec2;
   /** Distância que o personagem pode se afastar do centro antes de ser contido. */
