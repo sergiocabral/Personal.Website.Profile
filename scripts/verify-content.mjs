@@ -21,7 +21,7 @@ const content = read('content.json');
 const world = read('world.json');
 
 const LOCALES = ['pt-BR', 'en'];
-const ALLOWED_TOKENS = new Set(['age']);
+const ALLOWED_TOKENS = new Set(['age', 'codingYears', 'teachingYears']);
 
 const errors = [];
 const warnings = [];

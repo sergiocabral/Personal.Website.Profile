@@ -48,6 +48,10 @@ export type ContentData = {
     name: string;
     /** Data de nascimento ISO. A idade na bio é derivada daqui, nunca escrita à mão. */
     birthDate: string;
+    /** Ano em que começou a programar. Alimenta o marcador {codingYears}. */
+    codingSince: number;
+    /** Ano em que começou a ensinar. Alimenta o marcador {teachingYears}. */
+    teachingSince: number;
     role: Localized;
     url: string;
     siteName: string;

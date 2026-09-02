@@ -67,7 +67,15 @@ function age(birthDate, today = new Date()) {
   return hadBirthday ? years : years - 1;
 }
 
-const interpolate = (text) => text.replace('{age}', String(age(profile.birthDate)));
+/** Anos completos desde um ano de início. */
+const yearsSince = (year, today = new Date()) => today.getFullYear() - year;
+
+/** Mesmos marcadores de `src/data/derive.ts`. */
+const interpolate = (text) =>
+  text
+    .replace('{age}', String(age(profile.birthDate)))
+    .replace('{codingYears}', String(yearsSince(profile.codingSince)))
+    .replace('{teachingYears}', String(yearsSince(profile.teachingSince)));
 
 /** Micro-markdown, espelhando `src/ui/markdown.tsx`. */
 function markdown(text) {
