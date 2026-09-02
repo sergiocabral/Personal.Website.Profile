@@ -57,15 +57,8 @@ const escape = (value) =>
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 
-/** Mesmo cálculo de `src/data/derive.ts`, para o HTML estático não divergir da app. */
-function age(birthDate, today = new Date()) {
-  const born = new Date(birthDate);
-  const years = today.getFullYear() - born.getFullYear();
-  const hadBirthday =
-    today.getMonth() > born.getMonth() ||
-    (today.getMonth() === born.getMonth() && today.getDate() >= born.getDate());
-  return hadBirthday ? years : years - 1;
-}
+/** Mesmos cálculos de , para o HTML estático não divergir da app. */
+const ageFromYear = (birthYear, today = new Date()) => today.getFullYear() - birthYear;
 
 /** Anos completos desde um ano de início. */
 const yearsSince = (year, today = new Date()) => today.getFullYear() - year;
@@ -73,7 +66,7 @@ const yearsSince = (year, today = new Date()) => today.getFullYear() - year;
 /** Mesmos marcadores de `src/data/derive.ts`. */
 const interpolate = (text) =>
   text
-    .replace('{age}', String(age(profile.birthDate)))
+    .replace('{age}', String(ageFromYear(profile.birthYear)))
     .replace('{codingYears}', String(yearsSince(profile.codingSince)))
     .replace('{teachingYears}', String(yearsSince(profile.teachingSince)));
 

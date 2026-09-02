@@ -46,8 +46,13 @@ export type Section = {
 export type ContentData = {
   profile: {
     name: string;
-    /** Data de nascimento ISO. A idade na bio é derivada daqui, nunca escrita à mão. */
-    birthDate: string;
+    /**
+     * Ano de nascimento. A idade na bio é derivada daqui, nunca escrita à mão.
+     *
+     * É só o ano, e não a data completa: apenas a idade deve ser pública, então
+     * o dia exato nunca entra no conteúdo nem, por consequência, no bundle.
+     */
+    birthYear: number;
     /** Ano em que começou a programar. Alimenta o marcador {codingYears}. */
     codingSince: number;
     /** Ano em que começou a ensinar. Alimenta o marcador {teachingYears}. */

@@ -1,7 +1,7 @@
 {
   "profile": {
     "name": "Sergio Cabral",
-    "birthDate": "1982-07-01",
+    "birthYear": 1982,
     "role": {
       "pt-BR": "Desenvolvedor",
       "en": "Developer"
