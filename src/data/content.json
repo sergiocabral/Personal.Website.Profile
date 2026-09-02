@@ -63,8 +63,8 @@
           "icon": "infinity",
           "iconStyle": "solid",
           "description": {
-            "pt-BR": "Minhas páginas pessoais",
-            "en": "My personal pages"
+            "pt-BR": "Deixe um comentário aleatório",
+            "en": "Leave a random comment"
           }
         },
         {
@@ -259,6 +259,26 @@
           "description": {
             "pt-BR": "Traduções organizadas para comparar",
             "en": "Translations organised for comparison"
+          }
+        },
+        {
+          "name": "devnator",
+          "url": "https://devnator.com/",
+          "icon": "code",
+          "iconStyle": "solid",
+          "description": {
+            "pt-BR": "Meu nome como criador de conteúdo",
+            "en": "My name as a content creator"
+          }
+        },
+        {
+          "name": "Go Horse",
+          "url": "https://gohorse.dev/",
+          "icon": "horse",
+          "iconStyle": "solid",
+          "description": {
+            "pt-BR": "A metodologia eXtreme Go Horse",
+            "en": "The eXtreme Go Horse methodology"
           }
         },
         {
