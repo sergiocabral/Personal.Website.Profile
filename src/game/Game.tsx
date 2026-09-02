@@ -22,7 +22,6 @@ export function Game() {
 
   const activeZone = useGameStore((state) => state.activeZone);
   const open = useGameStore((state) => state.open);
-  const openDialog = useGameStore((state) => state.openDialog);
 
   // A tecla de interação é registrada pelo useInput como um pulso; aqui ela é
   // consumida e traduzida em "abrir o diálogo da zona onde eu estou".
@@ -47,8 +46,10 @@ export function Game() {
       orthographic
       // 2 é desperdício num mundo de faces chapadas; 1.5 já elimina o serrilhado.
       dpr={[1, 1.5]}
-      // Com o diálogo aberto nada se move: parar o loop economiza bateria.
-      frameloop={openDialog ? 'demand' : 'always'}
+      // Fixo em "always": alternar esta prop reconfigura o loop do renderizador
+      // em tempo de execução e era uma das causas do canvas sumir. Com o diálogo
+      // aberto quem pausa é a lógica de movimento, não o renderizador.
+      frameloop="always"
       gl={{ antialias: true, powerPreference: 'high-performance' }}
       onCreated={({ gl }) => gl.setClearColor('#0d1117')}
     >

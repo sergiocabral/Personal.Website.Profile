@@ -19,12 +19,24 @@ import { Seo } from '../ui/Seo';
  */
 const Game = lazy(() => import('../game/Game').then((module) => ({ default: module.Game })));
 
+/**
+ * O navegador consegue rodar WebGL?
+ *
+ * O contexto de teste é descartado explicitamente. Navegadores permitem um
+ * número pequeno de contextos WebGL simultâneos e, ao estourar o limite,
+ * derrubam o mais antigo — que seria justamente o do jogo. Sem este descarte, o
+ * mundo aparecia e sumia depois de alguns recarregamentos.
+ */
 function hasWebgl(): boolean {
   try {
+    if (!window.WebGLRenderingContext) return false;
+
     const canvas = document.createElement('canvas');
-    return Boolean(
-      window.WebGLRenderingContext && (canvas.getContext('webgl2') || canvas.getContext('webgl')),
-    );
+    const context = canvas.getContext('webgl2') ?? canvas.getContext('webgl');
+    if (!context) return false;
+
+    context.getExtension('WEBGL_lose_context')?.loseContext();
+    return true;
   } catch {
     return false;
   }
