@@ -1,0 +1,36 @@
+/** Ângulo de rotação do mundo em torno de Y para a vista isométrica clássica (45°). */
+export const CAMERA_YAW = Math.PI / 4;
+
+/** Direção da câmera, normalizada. Multiplicada pela distância vira a posição. */
+export const CAMERA_DIRECTION: [number, number, number] = [1, 1.15, 1];
+
+/** Distância da câmera ao alvo. Só afeta o clipping — o zoom controla o tamanho. */
+export const CAMERA_DISTANCE = 28;
+
+/** Unidades de mundo visíveis na menor dimensão da tela. Menor = mais perto. */
+export const CAMERA_VIEW_SIZE = 22;
+
+/** Velocidade máxima do personagem, em unidades por segundo. */
+export const PLAYER_SPEED = 5.6;
+
+/** Constantes de suavização: quanto maior, mais responsivo e menos "no gelo". */
+export const PLAYER_ACCEL = 12;
+export const PLAYER_FRICTION = 14;
+
+/** Raio de colisão do personagem. */
+export const PLAYER_RADIUS = 0.45;
+
+/** Altura do centro do personagem em relação ao chão. */
+export const PLAYER_HEIGHT = 0.9;
+
+/** Quanto a câmera "persegue" o alvo. Maior = gruda mais. */
+export const CAMERA_DAMPING = 4.5;
+
+/** Suavização da rotação do personagem ao mudar de direção. */
+export const TURN_DAMPING = 12;
+
+/**
+ * A zona fecha a `radius * ZONE_HYSTERESIS`, não a `radius`.
+ * Sem essa folga o prompt pisca quando o jogador para exatamente na borda.
+ */
+export const ZONE_HYSTERESIS = 1.22;
